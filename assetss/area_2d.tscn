@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn8e14f5ws7ac"]
+
+[ext_resource type="Script" uid="uid://dlle78vk35lue" path="res://assetss/Portal_Prueba.gd" id="1_mbufm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbufm"]
+size = Vector2(13040, 72.5)
+
+[node name="portal_De_Prueba" type="Area2D"]
+script = ExtResource("1_mbufm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(284, 3.75)
+shape = SubResource("RectangleShape2D_mbufm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
