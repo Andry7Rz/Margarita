@@ -6,4 +6,7 @@ extends Area2D
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		# En Godot 4, 'change_scene' cambió a 'change_scene_to_file'
-		get_tree().change_scene_to_file("res://Scenes/" + Escena + ".tscn")
+		get_tree().change_scene_to_file("res://Scenes/Pueblo.tscn")
+		
+		
+#get_tree().change_scene_to_file("res://Scenes/" + Escena + ".tscn")
