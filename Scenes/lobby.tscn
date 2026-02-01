@@ -2934,7 +2934,6 @@ func _process(delta: float) -> void:
 [node name="Lobby" type="Node2D"]
 
 [node name="House2" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(248, 144)
 scale = Vector2(0.5917969, 0.5253906)
 texture = ExtResource("14_0f3vc")
@@ -3029,7 +3028,7 @@ script = ExtResource("23_ic8vi")
 position = Vector2(3360, -31)
 Escena = "Pueblo"
 
-[node name="Player" parent="." instance=ExtResource("25_ic8vi")]
+[node name="Player" parent="." groups=["jugador"] instance=ExtResource("25_ic8vi")]
 position = Vector2(-1915, -18)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -3152,3 +3151,9 @@ scale = Vector2(1.4954835, 1.5205078)
 color = Color(1, 0.4627451, 0.08627451, 1)
 texture = SubResource("GradientTexture2D_ledmy")
 script = ExtResource("29_gut7a")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
