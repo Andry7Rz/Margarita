@@ -2,13 +2,13 @@ extends CharacterBody2D
 
 # --- CONFIGURACIÓN ---
 @export_category("Movimiento Base")
-@export var max_speed = 220.0 #250
+@export var max_speed = 220.0 
 @export var acceleration = 1400.0
 @export var friction = 1500.0
 @export var air_friction = 800.0
 
 @export_category("Salto Celeste")
-@export var jump_force = -300.0 #350
+@export var jump_force = -300.0 
 @export var gravity_multiplier = 1.0
 @export var fall_multiplier = 1.8 
 @export var coyote_duration = 0.15 
@@ -39,9 +39,11 @@ var jump_buffer_timer = 0.0
 var stamina = max_stamina
 var is_in_water = false
 
+# --- NUEVO: VARIABLE DE GRAVEDAD ---
+var gravity_direction = 1.0 # 1.0 es suelo abajo, -1.0 es suelo arriba
+
 func _physics_process(delta: float) -> void:
 	if is_dashing:
-		# Mientras dasheas, forzamos la animación dash_1
 		sprite.play("dash_1")
 		move_and_slide()
 		return 
@@ -65,7 +67,8 @@ func _physics_process(delta: float) -> void:
 		_handle_wall_mechanics(delta)
 
 	if (jump_buffer_timer > 0 and coyote_timer > 0) or (is_in_water and Input.is_action_just_pressed("ui_accept")):
-		velocity.y = jump_force
+		# Multiplicamos la fuerza de salto por la dirección de la gravedad
+		velocity.y = jump_force * gravity_direction # <--- CAMBIO
 		jump_buffer_timer = 0
 		coyote_timer = 0 
 
@@ -75,10 +78,19 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_focus_next") and can_dash: 
 		start_dash()
 
-	# ACTUALIZAR ANIMACIONES (Solo si no estamos dasheando)
 	_update_animations()
-
 	move_and_slide()
+
+# --- FUNCIÓN PARA CAMBIAR LA GRAVEDAD (LLAMADA DESDE EL AREA) ---
+func change_gravity_orientation(inverted: bool):
+	if inverted:
+		gravity_direction = -1.0
+		up_direction = Vector2.DOWN # Le dice al CharacterBody que el techo es suelo
+		sprite.flip_v = true # Girar el sprite de cabeza
+	else:
+		gravity_direction = 1.0
+		up_direction = Vector2.UP
+		sprite.flip_v = false
 
 # --- FUNCIONES DE APOYO ---
 
@@ -96,19 +108,25 @@ func _update_animations():
 		else:
 			sprite.play("idle")
 	else:
-		if velocity.y < 0:
+		# Comparamos velocidad relativa a la dirección de la gravedad
+		if velocity.y * gravity_direction < 0: # <--- CAMBIO
 			sprite.play("jump")
 		else:
 			sprite.play("fall")
 
 func _apply_gravity(delta):
 	if is_in_water:
-		velocity.y = move_toward(velocity.y, water_float_force, 600 * delta)
-		if velocity.y > water_sink_speed:
-			velocity.y = water_sink_speed
+		# En el agua, invertimos la flotación también si es necesario, 
+		# pero por simplicidad aquí solo afectamos la gravedad estándar
+		velocity.y = move_toward(velocity.y, water_float_force * gravity_direction, 600 * delta)
+		# Ajustar lógica de hundirse según dirección... (simplificado para este ejemplo)
 	elif not is_on_floor() and not is_on_wall():
-		var mult = fall_multiplier if velocity.y > 0 else gravity_multiplier
-		velocity.y += gravity * mult * delta
+		# Verificar dirección de caída
+		var going_up = (velocity.y * gravity_direction) < 0 
+		var mult = gravity_multiplier if going_up else fall_multiplier
+		
+		# Aplicamos gravedad en la dirección correcta
+		velocity.y += gravity * mult * delta * gravity_direction # <--- CAMBIO
 
 func _handle_horizontal_move(delta):
 	var direction = Input.get_axis("ui_left", "ui_right")
@@ -131,21 +149,28 @@ func _handle_wall_mechanics(delta):
 		var direction_input = Input.get_axis("ui_left", "ui_right")
 		var is_pushing = (direction_input != 0 and sign(direction_input) == -sign(wall_normal.x))
 
+		# Invertimos la lógica de "abajo" y "arriba" para las paredes
+		var going_down_wall = (velocity.y * gravity_direction) > 0
+		
 		if is_pushing:
-			if velocity.y < wall_climb_speed:
-				velocity.y = wall_climb_speed
-			if velocity.y > 0:
-				velocity.y = min(velocity.y, wall_slide_speed)
+			# Si estamos cayendo por la pared
+			if going_down_wall:
+				velocity.y = min(abs(velocity.y), wall_slide_speed) * sign(velocity.y)
+				# Esto asegura que no resbale más rápido de lo permitido, sea arriba o abajo
+
+			# Escalada (simplificada para invertir gravedad)
 			if Input.is_action_pressed("ui_up") and stamina > 0:
-				velocity.y = wall_climb_speed
+				velocity.y = wall_climb_speed * gravity_direction # <--- CAMBIO
 				stamina -= 45 * delta
 			elif not Input.is_action_pressed("ui_down"):
-				velocity.y = 0 
+				# Fricción estática en pared
+				# velocity.y = 0  <-- A veces es mejor dejar un pequeño deslizamiento
 				stamina -= 10 * delta 
 		
 		if jump_buffer_timer > 0:
 			velocity.x = wall_normal.x * wall_jump_force.x
-			velocity.y = wall_jump_force.y
+			# Invertimos la fuerza Y del salto de pared
+			velocity.y = wall_jump_force.y * gravity_direction # <--- CAMBIO
 			jump_buffer_timer = 0
 			stamina -= 10
 
@@ -154,25 +179,16 @@ func start_dash():
 	can_dash = false
 	
 	var dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	
+	# Si no presiona nada, dash hacia donde mira
 	if dir == Vector2.ZERO:
 		dir.x = -1.0 if sprite.flip_h else 1.0 
 	
+	# El dash no se ve afectado por la gravedad, así que sigue igual
 	velocity = dir.normalized() * dash_speed
-	
-	# Cambiamos a la animación de dash inmediatamente
 	sprite.play("dash_1")
 	
 	await get_tree().create_timer(dash_duration).timeout
 	
 	is_dashing = false
 	velocity = velocity * 0.5
-
-func enter_water():
-	is_in_water = true
-	velocity.y *= 0.3
-	can_dash = true 
-
-func exit_water():
-	is_in_water = false
-	if velocity.y < 0:
-		velocity.y = jump_force * 0.5
