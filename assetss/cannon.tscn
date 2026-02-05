@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3o2kyg66nthc"]
+
+[ext_resource type="Script" uid="uid://lktiryejd8ry" path="res://Script/cañon.gd" id="1_fsc3j"]
+[ext_resource type="Texture2D" uid="uid://egtuwspp7tc2" path="res://icon.svg" id="2_fjidy"]
+[ext_resource type="Texture2D" uid="uid://dqwhxygxapu3y" path="res://Tiles/Tileset/sun.png" id="2_pdnga"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pdnga"]
+radius = 4.0
+
+[node name="Cannon" type="Node2D"]
+
+[node name="Cañon" type="Area2D" parent="."]
+script = ExtResource("1_fsc3j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cañon"]
+shape = SubResource("CircleShape2D_pdnga")
+
+[node name="cañon" type="Sprite2D" parent="Cañon"]
+position = Vector2(0, 1)
+scale = Vector2(0.1328125, 0.1328125)
+texture = ExtResource("2_fjidy")
+
+[node name="Pivot" type="Node2D" parent="Cañon"]
+
+[node name="SpriteCañon" type="Sprite2D" parent="Cañon/Pivot"]
+
+[node name="Punta" type="Marker2D" parent="Cañon/Pivot"]
+
+[node name="Line2D" type="Line2D" parent="Cañon"]
+width = 5.0
+texture = ExtResource("2_pdnga")
+texture_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

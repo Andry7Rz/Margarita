@@ -192,3 +192,47 @@ func start_dash():
 	
 	is_dashing = false
 	velocity = velocity * 0.5
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	# --- AÑADIR AL SCRIPT DEL JUGADOR ---
+
+func enter_cannon(cannon_position):
+	velocity = Vector2.ZERO
+	global_position = cannon_position
+	# Desactivamos colisiones y visuales temporalmente
+	$CollisionShape2D.set_deferred("disabled", true)
+	sprite.visible = false
+	# Un estado especial para que no se mueva con las teclas
+	set_physics_process(false) 
+
+func launch_from_cannon(impulse_vector):
+	# Reactivamos todo
+	$CollisionShape2D.set_deferred("disabled", false)
+	sprite.visible = true
+	set_physics_process(true)
+	
+	# ¡BUM! Aplicamos la fuerza
+	velocity = impulse_vector
+	
+	# Pequeño truco: forzamos el estado de salto para que la gravedad actúe bien
+	# (Si usas máquinas de estado, cambia a estado FALL o JUMP aquí)

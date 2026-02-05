@@ -1,6 +1,6 @@
 extends AnimatableBody2D
 
-@export var distancia = Vector2(800, 170) # Cuánto se moverá desde su origen
+@export var distancia = Vector2(0, 200) # Cuánto se moverá desde su origen
 @export var velocidad = 0.8           # Tiempo en segundos para completar el trayecto
 
 var tiempo = 7.0
