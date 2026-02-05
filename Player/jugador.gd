@@ -39,6 +39,72 @@ var jump_buffer_timer = 0.0
 var stamina = max_stamina
 var is_in_water = false
 
+
+
+
+
+
+
+
+
+
+
+
+func enter_water():
+	print("JUGADOR: ¡He entrado al agua!") # <--- Esto confirmará si la señal llega
+	is_in_water = true
+	velocity.y *= 0.3
+	can_dash = true 
+
+func exit_water():
+	print("JUGADOR: He salido del agua")
+	is_in_water = false
+
+
+
+
+
+
+
+
+
+# --- VARIABLES DE CÁMARA ---
+@onready var camera = $Camera2D # Ajusta la ruta a tu cámara
+var zoom_normal = Vector2(3, 3)
+var zoom_amplio = Vector2(1, 1) # Menos de 1 significa más lejos
+
+
+func ajustar_zoom(objetivo: Vector2):
+	# Creamos un Tween para que el cambio sea suave
+	var tween = create_tween()
+	# Transición de 1 segundo con suavizado de entrada y salida
+	tween.tween_property(camera, "zoom", objetivo, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # --- NUEVO: VARIABLE DE GRAVEDAD ---
 var gravity_direction = 1.0 # 1.0 es suelo abajo, -1.0 es suelo arriba
 
@@ -222,6 +288,9 @@ func enter_cannon(cannon_position):
 	# Desactivamos colisiones y visuales temporalmente
 	$CollisionShape2D.set_deferred("disabled", true)
 	sprite.visible = false
+	
+	ajustar_zoom(zoom_amplio) # <--- SE ALEJA
+	velocity = Vector2.ZERO
 	# Un estado especial para que no se mueva con las teclas
 	set_physics_process(false) 
 
@@ -230,6 +299,7 @@ func launch_from_cannon(impulse_vector):
 	$CollisionShape2D.set_deferred("disabled", false)
 	sprite.visible = true
 	set_physics_process(true)
+	ajustar_zoom(zoom_normal) # <--- VUELVE A LA NORMALIDAD
 	
 	# ¡BUM! Aplicamos la fuerza
 	velocity = impulse_vector

@@ -2409,6 +2409,7 @@ offset = Vector2(-30.529404, 24.277306)
 [node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+visible = false
 modulate = Color(1, 0.7058824, 0.49803922, 1)
 texture_filter = 1
 position = Vector2(1199.0001, -139)
@@ -2465,7 +2466,7 @@ rotation = 0.5235988
 shape = SubResource("SegmentShape2D_ulst7")
 
 [node name="Player" parent="." instance=ExtResource("6_xpbrw")]
-position = Vector2(-4123, -639)
+position = Vector2(1187, 253)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(109, -8)

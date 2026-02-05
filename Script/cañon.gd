@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var fuerza_disparo = 2000.0 # Aumenté un poco la fuerza
+@export var fuerza_disparo = 1200.0 # Aumenté un poco la fuerza
 @export var velocidad_rotacion = 2.0
 @export var gravedad_prediccion = 980.0 
 
