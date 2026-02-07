@@ -1850,7 +1850,7 @@ tile_map_data = PackedByteArray("AAB5/wAAAAAAAAAAAAB5/wEAAAAAAAEAAAB5/wIAAAAAAAI
 tile_set = SubResource("TileSet_4f7ws")
 
 [node name="Player" parent="." groups=["jugador"] instance=ExtResource("7_mx542")]
-position = Vector2(-53, 143)
+position = Vector2(-2071, -19)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(108, 28)

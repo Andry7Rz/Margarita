@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://c2xocuckjh4bh"]
+[gd_scene load_steps=37 format=4 uid="uid://c2xocuckjh4bh"]
 
 [ext_resource type="Texture2D" uid="uid://cklnh8yys1qrj" path="res://Tiles/Decoracion/housebrickdoor.png" id="1_0t2hh"]
 [ext_resource type="Texture2D" uid="uid://ce16nnkqioorr" path="res://Tiles/Tileset/tileset.png" id="1_liocs"]
@@ -19,6 +19,12 @@
 [ext_resource type="Texture2D" uid="uid://cwaqo13m6llaf" path="res://Tiles/Decoracion/houseautre.png" id="13_smav3"]
 [ext_resource type="Texture2D" uid="uid://86yi27t8e1gq" path="res://Tiles/Decoracion/house3.png" id="14_h01og"]
 [ext_resource type="PackedScene" uid="uid://bq65rh5o1w6qy" path="res://Scenes/scena_!.tscn" id="18_h01og"]
+[ext_resource type="Texture2D" uid="uid://c3846dcb0j1cv" path="res://recursos/sprites/sprite-lancha.png" id="20_yow8p"]
+[ext_resource type="Texture2D" uid="uid://c5usd510j1gx2" path="res://recursos/sprites/sprite-personaje-lanchero.png" id="21_h1rpr"]
+[ext_resource type="Texture2D" uid="uid://btygfeqg50y8v" path="res://recursos/sprites/sprite-personaje-buzo.png" id="22_ihubg"]
+[ext_resource type="Texture2D" uid="uid://d1nklkiejrjai" path="res://recursos/sprites/sprite-personaje-niña.png" id="23_667kf"]
+[ext_resource type="Texture2D" uid="uid://b0t7s4lo81qpl" path="res://recursos/sprites/sprite-personaje-pescador.png" id="24_a15xq"]
+[ext_resource type="Texture2D" uid="uid://ck6pjuj47iv5n" path="res://recursos/sprites/sprite-personaje-señor.png" id="25_h1rpr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xpbrw"]
 texture = ExtResource("1_liocs")
@@ -2409,7 +2415,6 @@ offset = Vector2(-30.529404, 24.277306)
 [node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
-visible = false
 modulate = Color(1, 0.7058824, 0.49803922, 1)
 texture_filter = 1
 position = Vector2(1199.0001, -139)
@@ -2466,7 +2471,7 @@ rotation = 0.5235988
 shape = SubResource("SegmentShape2D_ulst7")
 
 [node name="Player" parent="." instance=ExtResource("6_xpbrw")]
-position = Vector2(1187, 253)
+position = Vector2(-4252, -288)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(109, -8)
@@ -2501,7 +2506,7 @@ color = Color(0.49747366, 0.49747366, 0.49747366, 1)
 texture = SubResource("GradientTexture2D_wqt8u")
 
 [node name="luz_sol2" type="PointLight2D" parent="configuracion de iluminacion"]
-position = Vector2(-833, 640)
+position = Vector2(-844, 651)
 rotation = -0.006694878
 scale = Vector2(155.98439, 77.23536)
 color = Color(0.49747366, 0.49747366, 0.49747366, 1)
@@ -2509,3 +2514,31 @@ texture = SubResource("GradientTexture2D_wqt8u")
 
 [node name="Agua" parent="." instance=ExtResource("18_h01og")]
 position = Vector2(927, 474)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(1055, 426)
+scale = Vector2(2.921874, 2.5468748)
+texture = ExtResource("20_yow8p")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D"]
+position = Vector2(911, 437)
+texture = ExtResource("21_h1rpr")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D"]
+position = Vector2(1403, 754)
+texture = ExtResource("22_ihubg")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Node2D"]
+position = Vector2(-779, 368.00003)
+scale = Vector2(0.609375, 0.59375)
+texture = ExtResource("23_667kf")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Node2D"]
+position = Vector2(-565, 390)
+texture = ExtResource("24_a15xq")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Node2D"]
+position = Vector2(-2880, -186)
+texture = ExtResource("25_h1rpr")
