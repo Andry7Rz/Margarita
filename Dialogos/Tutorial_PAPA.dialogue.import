@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bqgaf2a8gu73e"
+path="res://.godot/imported/Tutorial_PAPA.dialogue-44971483eb1ab50fd6e60f0208f6ce7a.tres"
+
+[deps]
+
+source_file="res://Dialogos/Tutorial_PAPA.dialogue"
+dest_files=["res://.godot/imported/Tutorial_PAPA.dialogue-44971483eb1ab50fd6e60f0208f6ce7a.tres"]
+
+[params]
+
+defaults=true

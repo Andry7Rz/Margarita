@@ -38,77 +38,23 @@ var coyote_timer = 0.0
 var jump_buffer_timer = 0.0
 var stamina = max_stamina
 var is_in_water = false
-
-
-
-
-
-
-
-
-
-
-
-
-func enter_water():
-	print("JUGADOR: ¡He entrado al agua!") # <--- Esto confirmará si la señal llega
-	is_in_water = true
-	velocity.y *= 0.3
-	can_dash = true 
-
-func exit_water():
-	print("JUGADOR: He salido del agua")
-	is_in_water = false
-
-
-
-
-
-
-
-
+var gravity_direction = 1.0 
+var esta_hablando = false
 
 # --- VARIABLES DE CÁMARA ---
-@onready var camera = $Camera2D # Ajusta la ruta a tu cámara
+@onready var camera = $Camera2D 
 var zoom_normal = Vector2(3, 3)
-var zoom_amplio = Vector2(1, 1) # Menos de 1 significa más lejos
-
-
-func ajustar_zoom(objetivo: Vector2):
-	# Creamos un Tween para que el cambio sea suave
-	var tween = create_tween()
-	# Transición de 1 segundo con suavizado de entrada y salida
-	tween.tween_property(camera, "zoom", objetivo, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# --- NUEVO: VARIABLE DE GRAVEDAD ---
-var gravity_direction = 1.0 # 1.0 es suelo abajo, -1.0 es suelo arriba
+var zoom_amplio = Vector2(1, 1)
 
 func _physics_process(delta: float) -> void:
+	# BLOQUEO POR DIÁLOGO
+	# Si está hablando, solo aplicamos gravedad y actualizamos animaciones
+	if esta_hablando:
+		_apply_gravity(delta)
+		_update_animations()
+		move_and_slide()
+		return # <-- Esto ignora el resto del código (controles, saltos, dash)
+
 	if is_dashing:
 		sprite.play("dash_1")
 		move_and_slide()
@@ -122,7 +68,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		coyote_timer -= delta
 	
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("saltar"):
 		jump_buffer_timer = jump_buffer_duration
 	else:
 		jump_buffer_timer -= delta
@@ -132,37 +78,46 @@ func _physics_process(delta: float) -> void:
 	if not is_in_water:
 		_handle_wall_mechanics(delta)
 
-	if (jump_buffer_timer > 0 and coyote_timer > 0) or (is_in_water and Input.is_action_just_pressed("ui_accept")):
-		# Multiplicamos la fuerza de salto por la dirección de la gravedad
-		velocity.y = jump_force * gravity_direction # <--- CAMBIO
+	if (jump_buffer_timer > 0 and coyote_timer > 0) or (is_in_water and Input.is_action_just_pressed("saltar")):
+		velocity.y = jump_force * gravity_direction
 		jump_buffer_timer = 0
 		coyote_timer = 0 
 
 	if not is_on_wall() or is_on_floor() or is_in_water: 
 		_handle_horizontal_move(delta)
 
-	if Input.is_action_just_pressed("ui_focus_next") and can_dash: 
+	if Input.is_action_just_pressed("dash") and can_dash: 
 		start_dash()
 
 	_update_animations()
 	move_and_slide()
 
-# --- FUNCIÓN PARA CAMBIAR LA GRAVEDAD (LLAMADA DESDE EL AREA) ---
-func change_gravity_orientation(inverted: bool):
-	if inverted:
-		gravity_direction = -1.0
-		up_direction = Vector2.DOWN # Le dice al CharacterBody que el techo es suelo
-		sprite.flip_v = true # Girar el sprite de cabeza
-	else:
-		gravity_direction = 1.0
-		up_direction = Vector2.UP
-		sprite.flip_v = false
-
 # --- FUNCIONES DE APOYO ---
+func set_hablando(valor: bool):
+	esta_hablando = valor
+	if valor:
+		velocity = Vector2.ZERO # Se detiene en seco al empezar
+
+func start_dash():
+	is_dashing = true
+	can_dash = false
+	
+	var dir = Input.get_vector("izquierda", "derecha", "arriba", "abajo")
+	if dir == Vector2.ZERO:
+		dir.x = -1.0 if sprite.flip_h else 1.0 
+	
+	velocity = dir.normalized() * dash_speed
+	sprite.play("dash_1")
+	
+	await get_tree().create_timer(dash_duration).timeout
+	
+	is_dashing = false
+	# Limpieza de velocidad para evitar el bug de escalado infinito
+	velocity.x = clamp(velocity.x, -max_speed, max_speed)
+	velocity.y = clamp(velocity.y, -max_speed, max_speed)
 
 func _update_animations():
-	var direction = Input.get_axis("ui_left", "ui_right")
-	
+	var direction = Input.get_axis("izquierda", "derecha")
 	if direction != 0:
 		sprite.flip_h = (direction < 0)
 
@@ -174,28 +129,21 @@ func _update_animations():
 		else:
 			sprite.play("idle")
 	else:
-		# Comparamos velocidad relativa a la dirección de la gravedad
-		if velocity.y * gravity_direction < 0: # <--- CAMBIO
+		if velocity.y * gravity_direction < 0:
 			sprite.play("jump")
 		else:
 			sprite.play("fall")
 
 func _apply_gravity(delta):
 	if is_in_water:
-		# En el agua, invertimos la flotación también si es necesario, 
-		# pero por simplicidad aquí solo afectamos la gravedad estándar
 		velocity.y = move_toward(velocity.y, water_float_force * gravity_direction, 600 * delta)
-		# Ajustar lógica de hundirse según dirección... (simplificado para este ejemplo)
 	elif not is_on_floor() and not is_on_wall():
-		# Verificar dirección de caída
 		var going_up = (velocity.y * gravity_direction) < 0 
 		var mult = gravity_multiplier if going_up else fall_multiplier
-		
-		# Aplicamos gravedad en la dirección correcta
-		velocity.y += gravity * mult * delta * gravity_direction # <--- CAMBIO
+		velocity.y += gravity * mult * delta * gravity_direction
 
 func _handle_horizontal_move(delta):
-	var direction = Input.get_axis("ui_left", "ui_right")
+	var direction = Input.get_axis("izquierda", "derecha")
 	var final_speed = max_speed * water_speed_multiplier if is_in_water else max_speed
 	var final_accel = acceleration * water_speed_multiplier if is_in_water else acceleration
 	
@@ -210,99 +158,65 @@ func _handle_horizontal_move(delta):
 		velocity.x = move_toward(velocity.x, 0, current_friction * delta)
 
 func _handle_wall_mechanics(delta):
-	if is_on_wall_only():
+	if is_on_wall_only() and not is_dashing:
 		var wall_normal = get_wall_normal()
-		var direction_input = Input.get_axis("ui_left", "ui_right")
+		var direction_input = Input.get_axis("izquierda", "derecha")
 		var is_pushing = (direction_input != 0 and sign(direction_input) == -sign(wall_normal.x))
 
-		# Invertimos la lógica de "abajo" y "arriba" para las paredes
-		var going_down_wall = (velocity.y * gravity_direction) > 0
-		
 		if is_pushing:
-			# Si estamos cayendo por la pared
-			if going_down_wall:
-				velocity.y = min(abs(velocity.y), wall_slide_speed) * sign(velocity.y)
-				# Esto asegura que no resbale más rápido de lo permitido, sea arriba o abajo
-
-			# Escalada (simplificada para invertir gravedad)
-			if Input.is_action_pressed("ui_up") and stamina > 0:
-				velocity.y = wall_climb_speed * gravity_direction # <--- CAMBIO
-				stamina -= 45 * delta
-			elif not Input.is_action_pressed("ui_down"):
-				# Fricción estática en pared
-				# velocity.y = 0  <-- A veces es mejor dejar un pequeño deslizamiento
-				stamina -= 10 * delta 
+			if Input.is_action_pressed("arriba") and stamina > 0:
+				velocity.y = wall_climb_speed * gravity_direction
+				stamina -= 60 * delta 
+			elif Input.is_action_pressed("abajo"):
+				velocity.y = wall_slide_speed * 2 * gravity_direction
+			else:
+				if stamina > 0:
+					velocity.y = 0 
+					stamina -= 15 * delta 
+				else:
+					velocity.y = wall_slide_speed * gravity_direction
 		
-		if jump_buffer_timer > 0:
+		if Input.is_action_just_pressed("saltar"):
 			velocity.x = wall_normal.x * wall_jump_force.x
-			# Invertimos la fuerza Y del salto de pared
-			velocity.y = wall_jump_force.y * gravity_direction # <--- CAMBIO
-			jump_buffer_timer = 0
-			stamina -= 10
+			velocity.y = wall_jump_force.y * gravity_direction
+			stamina -= 5 
+			can_dash = true
 
-func start_dash():
-	is_dashing = true
-	can_dash = false
-	
-	var dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
-	# Si no presiona nada, dash hacia donde mira
-	if dir == Vector2.ZERO:
-		dir.x = -1.0 if sprite.flip_h else 1.0 
-	
-	# El dash no se ve afectado por la gravedad, así que sigue igual
-	velocity = dir.normalized() * dash_speed
-	sprite.play("dash_1")
-	
-	await get_tree().create_timer(dash_duration).timeout
-	
-	is_dashing = false
-	velocity = velocity * 0.5
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	# --- AÑADIR AL SCRIPT DEL JUGADOR ---
+# --- MECÁNICAS EXTERNAS ---
+
+func change_gravity_orientation(inverted: bool):
+	if inverted:
+		gravity_direction = -1.0
+		up_direction = Vector2.DOWN
+		sprite.flip_v = true
+	else:
+		gravity_direction = 1.0
+		up_direction = Vector2.UP
+		sprite.flip_v = false
+
+func enter_water():
+	is_in_water = true
+	velocity.y *= 0.3
+	can_dash = true 
+
+func exit_water():
+	is_in_water = false
+
+func ajustar_zoom(objetivo: Vector2):
+	var tween = create_tween()
+	tween.tween_property(camera, "zoom", objetivo, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func enter_cannon(cannon_position):
 	velocity = Vector2.ZERO
 	global_position = cannon_position
-	# Desactivamos colisiones y visuales temporalmente
 	$CollisionShape2D.set_deferred("disabled", true)
 	sprite.visible = false
-	
-	ajustar_zoom(zoom_amplio) # <--- SE ALEJA
-	velocity = Vector2.ZERO
-	# Un estado especial para que no se mueva con las teclas
+	ajustar_zoom(zoom_amplio)
 	set_physics_process(false) 
 
 func launch_from_cannon(impulse_vector):
-	# Reactivamos todo
 	$CollisionShape2D.set_deferred("disabled", false)
 	sprite.visible = true
 	set_physics_process(true)
-	ajustar_zoom(zoom_normal) # <--- VUELVE A LA NORMALIDAD
-	
-	# ¡BUM! Aplicamos la fuerza
+	ajustar_zoom(zoom_normal)
 	velocity = impulse_vector
-	
-	# Pequeño truco: forzamos el estado de salto para que la gravedad actúe bien
-	# (Si usas máquinas de estado, cambia a estado FALL o JUMP aquí)

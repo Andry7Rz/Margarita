@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://60mi0npqqdxr"]
+
+[ext_resource type="Texture2D" uid="uid://b5xi44irsvf1t" path="res://recursos/sprites/Burbuja.png" id="1_7an34"]
+[ext_resource type="Script" uid="uid://m4d44tecbqww" path="res://Scenes/particulas_burbujas.gd" id="3_5muxs"]
+
+[sub_resource type="Curve" id="Curve_mlqbd"]
+
+[node name="burbujas_dash" type="Node2D"]
+position = Vector2(931, 518)
+script = ExtResource("3_5muxs")
+
+[node name="ParticulasBurbujas" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 100
+texture = ExtResource("1_7an34")
+lifetime = 1.2
+one_shot = true
+explosiveness = 0.8
+randomness = 1.0
+gravity = Vector2(0, -200)
+initial_velocity_min = 21.74
+initial_velocity_max = 184.78
+scale_amount_min = 0.2
+scale_amount_max = 49.46
+scale_amount_curve = SubResource("Curve_mlqbd")

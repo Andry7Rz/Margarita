@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ctr3s5hgw7twv"
+path="res://.godot/imported/HOLA.dialogue-c85f99ade7cc89d86a368e5ddc0d291e.tres"
+
+[deps]
+
+source_file="res://Dialogos/HOLA.dialogue"
+dest_files=["res://.godot/imported/HOLA.dialogue-c85f99ade7cc89d86a368e5ddc0d291e.tres"]
+
+[params]
+
+defaults=true

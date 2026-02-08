@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dcwuca7rbt7kg"
+path="res://.godot/imported/Tutorial_MAMA.dialogue-6d443137fb092fb1e97d358c35be5821.tres"
+
+[deps]
+
+source_file="res://Dialogos/Tutorial_MAMA.dialogue"
+dest_files=["res://.godot/imported/Tutorial_MAMA.dialogue-6d443137fb092fb1e97d358c35be5821.tres"]
+
+[params]
+
+defaults=true

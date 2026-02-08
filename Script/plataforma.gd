@@ -1,9 +1,9 @@
 extends AnimatableBody2D
 
-@export var distancia = Vector2(0, 200) # Cuánto se moverá desde su origen
-@export var velocidad = 0.8           # Tiempo en segundos para completar el trayecto
+@export var distancia = Vector2(350, 0) # Cuánto se moverá desde su origen
+@export var velocidad = 1.0           # Tiempo en segundos para completar el trayecto
 
-var tiempo = 7.0
+var tiempo = 5.5
 
 func _physics_process(delta: float) -> void:
 	# Usamos una función seno para que el movimiento sea suave (va y vuelve)

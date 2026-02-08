@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://b0qvhmhusd3ph"
+path="res://.godot/imported/Tutorial_HERMANA.dialogue-849a0d85b67c11b2564ed1b07ea403db.tres"
+
+[deps]
+
+source_file="res://Dialogos/Tutorial_HERMANA.dialogue"
+dest_files=["res://.godot/imported/Tutorial_HERMANA.dialogue-849a0d85b67c11b2564ed1b07ea403db.tres"]
+
+[params]
+
+defaults=true
