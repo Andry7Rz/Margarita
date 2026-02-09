@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://b872vtxo486j4"]
+[gd_scene load_steps=56 format=3 uid="uid://b872vtxo486j4"]
 
 [ext_resource type="Script" uid="uid://pmej8a6u06y1" path="res://Player/jugador.gd" id="1_nu1ia"]
 [ext_resource type="Texture2D" uid="uid://ebdsmrlxxcgm" path="res://D/sprites player/Fall (32x32).png" id="2_uvyug"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://eovj72w15ed1" path="res://D/sprites player/Run (32x32).png" id="5_5aiec"]
 [ext_resource type="Texture2D" uid="uid://b7867u84ecgla" path="res://D/sprites player/dash (32x32).png" id="5_ims55"]
 [ext_resource type="Texture2D" uid="uid://caple2ogy17g2" path="res://D/sprites player/Wall Jump (32x32).png" id="6_ntgr7"]
+[ext_resource type="AudioStream" uid="uid://bs8q00dnymmha" path="res://Player/salto.wav" id="9_ntgr7"]
+[ext_resource type="AudioStream" uid="uid://bh3f7lyn7af5g" path="res://Player/dash.wav" id="10_mf6js"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nu1ia"]
 size = Vector2(16, 20)
@@ -364,3 +366,9 @@ scale = Vector2(0.87499994, 0.84375006)
 sprite_frames = SubResource("SpriteFrames_67tt6")
 animation = &"run"
 autoplay = "idle"
+
+[node name="SonidoSalto" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ntgr7")
+
+[node name="SonidoDash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_mf6js")

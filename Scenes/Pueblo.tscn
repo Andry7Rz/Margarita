@@ -2424,10 +2424,11 @@ scale = Vector2(3.3142362, 1.3518518)
 texture = ExtResource("4_ulst7")
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
-position = Vector2(-1899, 94)
-rotation = 0.19053122
+position = Vector2(-1898.9998, -31.999954)
+rotation = 0.2583432
 scale = Vector2(12.204865, 6.763564)
 texture = ExtResource("5_smav3")
 offset = Vector2(-30.529404, 24.277306)

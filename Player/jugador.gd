@@ -7,6 +7,11 @@ extends CharacterBody2D
 @export var friction = 1500.0
 @export var air_friction = 800.0
 
+# --- NUEVOS: NODOS DE AUDIO ---
+# Asegúrate de que los nodos hijos se llamen exactamente así en tu escena
+@onready var sonido_salto = $SonidoSalto
+@onready var sonido_dash = $SonidoDash
+
 @export_category("Salto Celeste")
 @export var jump_force = -300.0 
 @export var gravity_multiplier = 1.0
@@ -29,6 +34,7 @@ extends CharacterBody2D
 @export var water_float_force = -80.0
 @export var water_sink_speed = 100.0
 
+
 # --- VARIABLES INTERNAS ---
 @onready var sprite = $AnimatedSprite2D 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -47,16 +53,13 @@ var zoom_normal = Vector2(3, 3)
 var zoom_amplio = Vector2(1, 1)
 
 
-
-
 func _physics_process(delta: float) -> void:
 	# BLOQUEO POR DIÁLOGO
-	# Si está hablando, solo aplicamos gravedad y actualizamos animaciones
 	if esta_hablando:
 		_apply_gravity(delta)
 		_update_animations()
 		move_and_slide()
-		return # <-- Esto ignora el resto del código (controles, saltos, dash)
+		return 
 
 	if is_dashing:
 		sprite.play("dash_1")
@@ -81,10 +84,16 @@ func _physics_process(delta: float) -> void:
 	if not is_in_water:
 		_handle_wall_mechanics(delta)
 
+	# --- LÓGICA DE SALTO (Con Sonido) ---
 	if (jump_buffer_timer > 0 and coyote_timer > 0) or (is_in_water and Input.is_action_just_pressed("saltar")):
 		velocity.y = jump_force * gravity_direction
 		jump_buffer_timer = 0
 		coyote_timer = 0 
+		
+		# REPRODUCIR SONIDO DE SALTO
+		if sonido_salto:
+			sonido_salto.pitch_scale = randf_range(0.9, 1.1) # Variación Undertale/Celeste
+			sonido_salto.play()
 
 	if not is_on_wall() or is_on_floor() or is_in_water: 
 		_handle_horizontal_move(delta)
@@ -99,11 +108,15 @@ func _physics_process(delta: float) -> void:
 func set_hablando(valor: bool):
 	esta_hablando = valor
 	if valor:
-		velocity = Vector2.ZERO # Se detiene en seco al empezar
+		velocity = Vector2.ZERO
 
 func start_dash():
 	is_dashing = true
 	can_dash = false
+	
+	# REPRODUCIR SONIDO DE DASH
+	if sonido_dash:
+		sonido_dash.play()
 	
 	var dir = Input.get_vector("izquierda", "derecha", "arriba", "abajo")
 	if dir == Vector2.ZERO:
@@ -115,7 +128,6 @@ func start_dash():
 	await get_tree().create_timer(dash_duration).timeout
 	
 	is_dashing = false
-	# Limpieza de velocidad para evitar el bug de escalado infinito
 	velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	velocity.y = clamp(velocity.y, -max_speed, max_speed)
 
@@ -184,6 +196,9 @@ func _handle_wall_mechanics(delta):
 			velocity.y = wall_jump_force.y * gravity_direction
 			stamina -= 5 
 			can_dash = true
+			# Sonido de salto de pared
+			if sonido_salto:
+				sonido_salto.play()
 
 # --- MECÁNICAS EXTERNAS ---
 

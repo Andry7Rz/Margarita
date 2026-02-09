@@ -1851,7 +1851,7 @@ tile_map_data = PackedByteArray("AAB5/wAAAAAAAAAAAAB5/wEAAAAAAAEAAAB5/wIAAAAAAAI
 tile_set = SubResource("TileSet_4f7ws")
 
 [node name="Player" parent="." groups=["jugador"] instance=ExtResource("7_mx542")]
-position = Vector2(-2071, -19)
+position = Vector2(-183, 146)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(108, 28)
@@ -1900,7 +1900,8 @@ position = Vector2(1211, -920)
 shape = SubResource("CapsuleShape2D_mtb4q")
 
 [node name="Cannon" parent="." instance=ExtResource("11_7b3vf")]
-position = Vector2(178, 189)
+position = Vector2(176, 193.00002)
+scale = Vector2(2.3662004, 2.912426)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_8m502")

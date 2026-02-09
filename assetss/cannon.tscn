@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3o2kyg66nthc"]
+[gd_scene load_steps=6 format=3 uid="uid://d3o2kyg66nthc"]
 
 [ext_resource type="Script" uid="uid://lktiryejd8ry" path="res://Script/cañon.gd" id="1_fsc3j"]
-[ext_resource type="Texture2D" uid="uid://egtuwspp7tc2" path="res://icon.svg" id="2_fjidy"]
 [ext_resource type="Texture2D" uid="uid://dqwhxygxapu3y" path="res://Tiles/Tileset/sun.png" id="2_pdnga"]
+[ext_resource type="Texture2D" uid="uid://buqdk4tdkyttq" path="res://recursos/sprites/cañon.png" id="3_gdpt6"]
+[ext_resource type="Texture2D" uid="uid://d2xxjxd40pmbx" path="res://recursos/sprites/pivote.png" id="3_y668d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pdnga"]
-radius = 4.0
+radius = 7.071068
 
 [node name="Cannon" type="Node2D"]
 
@@ -16,13 +17,16 @@ script = ExtResource("1_fsc3j")
 shape = SubResource("CircleShape2D_pdnga")
 
 [node name="cañon" type="Sprite2D" parent="Cañon"]
-position = Vector2(0, 1)
-scale = Vector2(0.1328125, 0.1328125)
-texture = ExtResource("2_fjidy")
+position = Vector2(3, -3)
+scale = Vector2(1.5664063, 1.3164061)
+texture = ExtResource("3_y668d")
 
 [node name="Pivot" type="Node2D" parent="Cañon"]
 
 [node name="SpriteCañon" type="Sprite2D" parent="Cañon/Pivot"]
+position = Vector2(7, -4)
+scale = Vector2(1.125, 1.03125)
+texture = ExtResource("3_gdpt6")
 
 [node name="Punta" type="Marker2D" parent="Cañon/Pivot"]
 
