@@ -32,7 +32,7 @@
 [ext_resource type="Script" uid="uid://bbx5l4tr04rim" path="res://assetss/SCRIPT_DE_DIALOGOS/PAPA.gd" id="27_kcasr"]
 [ext_resource type="Texture2D" uid="uid://byw8xvhukk33y" path="res://recursos/sprites/sprite-personaje-angelina.png" id="28_e834d"]
 [ext_resource type="Texture2D" uid="uid://cirbqp24lb5xk" path="res://recursos/sprites/signo1.png" id="28_o8yfv"]
-[ext_resource type="Script" path="res://assetss/SCRIPT_DE_DIALOGOS/ange.gd" id="29_e834d"]
+[ext_resource type="Script" uid="uid://vwrv3d63y41j" path="res://assetss/SCRIPT_DE_DIALOGOS/ange.gd" id="29_e834d"]
 [ext_resource type="Texture2D" uid="uid://b1lw1uhtqqf4v" path="res://recursos/sprites/sprite-personaje-lamama.png" id="29_qir4x"]
 [ext_resource type="Script" uid="uid://1eivexv21xl8" path="res://assetss/SCRIPT_DE_DIALOGOS/Tutorial_HERMANA.gd" id="31_e834d"]
 [ext_resource type="Script" uid="uid://daw62e720sukl" path="res://Script/portal_menu.gd" id="34_qir4x"]
