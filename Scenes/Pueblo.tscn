@@ -2573,7 +2573,7 @@ scale = Vector2(2.036827, 1.8481014)
 texture = ExtResource("28_o8yfv")
 
 [node name="ANGE" type="Sprite2D" parent="NPC"]
-position = Vector2(1732.9999, 455)
+position = Vector2(590, 374.99997)
 scale = Vector2(-0.76091003, 0.84982204)
 texture = ExtResource("28_e834d")
 

@@ -238,3 +238,7 @@ func launch_from_cannon(impulse_vector):
 	set_physics_process(true)
 	ajustar_zoom(zoom_normal)
 	velocity = impulse_vector
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

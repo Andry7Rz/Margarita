@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnxon87bjq7jw"]
+[gd_scene load_steps=5 format=3 uid="uid://dnxon87bjq7jw"]
 
-[ext_resource type="Texture2D" uid="uid://vhpn5pirbaex" path="res://recursos/sprites/menu.png" id="1_1rerr"]
 [ext_resource type="Script" uid="uid://kca3edl52qnf" path="res://Scenes/menu.gd" id="1_xhh6f"]
-[ext_resource type="Texture2D" uid="uid://b5xi44irsvf1t" path="res://recursos/sprites/Burbuja.png" id="3_cayip"]
+[ext_resource type="Texture2D" uid="uid://c0p3u0w01hjuu" path="res://recursos/sprites/asd (1).png" id="2_cayip"]
+[ext_resource type="Texture2D" uid="uid://dc22j6xcsv4kc" path="res://recursos/sprites/icon.png" id="3_cayip"]
+[ext_resource type="Texture2D" uid="uid://cirbqp24lb5xk" path="res://recursos/sprites/signo1.png" id="4_158mb"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("boton_mundo_1")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2.0
@@ -12,20 +13,36 @@ offset_top = -4.0
 offset_right = 42.0
 offset_bottom = 36.0
 script = ExtResource("1_xhh6f")
+boton_mundo_1 = NodePath("TextureButton_Mundo1")
 
-[node name="Menu" type="Sprite2D" parent="."]
-position = Vector2(962, 540)
-scale = Vector2(1.3607955, 1.40625)
-texture = ExtResource("1_1rerr")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="BoxContainer" type="BoxContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 883.0
-offset_top = 204.0
-offset_right = 1089.0
-offset_bottom = 244.0
+offset_left = -2.0
+offset_top = 5.0
+offset_right = 1918.0
+offset_bottom = 1085.0
+mouse_filter = 2
+texture = ExtResource("2_cayip")
+expand_mode = 1
 
-[node name="Button" type="Button" parent="BoxContainer"]
-layout_mode = 2
-text = "hjhjkhkhjhkhj"
-icon = ExtResource("3_cayip")
+[node name="TextureButton_Salir" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 24.0
+offset_right = 71.0
+offset_bottom = 64.0
+
+[node name="TextureButton_Mundo1" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 754.00006
+offset_top = 154.0
+offset_right = 814.8654
+offset_bottom = 205.4497
+scale = Vector2(8.921333, 8.882461)
+texture_normal = ExtResource("4_158mb")
+texture_hover = ExtResource("4_158mb")
+texture_focused = ExtResource("3_cayip")
+
+[connection signal="pressed" from="TextureButton_Mundo1" to="." method="_on_texture_button_mundo_1_pressed"]

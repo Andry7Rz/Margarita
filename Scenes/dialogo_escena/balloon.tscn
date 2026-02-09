@@ -131,6 +131,7 @@ grow_vertical = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer"]
 clip_children = 2
+texture_filter = 1
 layout_mode = 2
 mouse_filter = 1
 
