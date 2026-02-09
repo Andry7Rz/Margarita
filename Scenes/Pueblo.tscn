@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://c2xocuckjh4bh"]
+[gd_scene load_steps=50 format=4 uid="uid://c2xocuckjh4bh"]
 
 [ext_resource type="Texture2D" uid="uid://cklnh8yys1qrj" path="res://Tiles/Decoracion/housebrickdoor.png" id="1_0t2hh"]
 [ext_resource type="Texture2D" uid="uid://ce16nnkqioorr" path="res://Tiles/Tileset/tileset.png" id="1_liocs"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b872vtxo486j4" path="res://Player/JUGADOR.tscn" id="6_xpbrw"]
 [ext_resource type="PackedScene" uid="uid://bn8e14f5ws7ac" path="res://assetss/area_2d.tscn" id="7_ulst7"]
 [ext_resource type="Texture2D" uid="uid://cvxsqvbjed8fy" path="res://Tiles/Tileset/TX Village Props.png" id="7_wqt8u"]
+[ext_resource type="Texture2D" uid="uid://bkepwcr52qqbi" path="res://recursos/Objetos/1.png" id="7_x04uc"]
 [ext_resource type="Texture2D" uid="uid://cvu7r1v4wgdc5" path="res://Tiles/Tileset/Decor.png" id="8_uuh84"]
 [ext_resource type="Texture2D" uid="uid://bj5y4i1u2csrr" path="res://Tiles/Tileset/tilemap_new_softy_sand.png" id="9_nntbb"]
 [ext_resource type="Texture2D" uid="uid://djttxe1w6icep" path="res://Tiles/Decoracion/house1.png" id="11_nntbb"]
@@ -36,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://b1lw1uhtqqf4v" path="res://recursos/sprites/sprite-personaje-lamama.png" id="29_qir4x"]
 [ext_resource type="Script" uid="uid://1eivexv21xl8" path="res://assetss/SCRIPT_DE_DIALOGOS/Tutorial_HERMANA.gd" id="31_e834d"]
 [ext_resource type="Script" uid="uid://daw62e720sukl" path="res://Script/portal_menu.gd" id="34_qir4x"]
+[ext_resource type="AudioStream" uid="uid://cuybjm8fjdthp" path="res://recursos/musica/Olas De Pixel.mp3" id="38_62yx6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xpbrw"]
 texture = ExtResource("1_liocs")
@@ -2385,7 +2387,15 @@ fill_from = Vector2(0.19270833, 0.9322917)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
+position = Vector2(-532, -779.9999)
+scale = Vector2(24.564236, 15.3117285)
+texture = ExtResource("7_x04uc")
+
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(-760.00006, 1166)
@@ -2585,7 +2595,7 @@ position = Vector2(4600, 607)
 Escena = "Pueblo"
 
 [node name="Player" parent="." groups=["jugador"] instance=ExtResource("6_xpbrw")]
-position = Vector2(852, 407)
+position = Vector2(-4215, -306)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(109, -8)
@@ -2651,8 +2661,12 @@ scale = Vector2(0.609375, 0.59375)
 texture = ExtResource("23_667kf")
 
 [node name="Area2D2" parent="." instance=ExtResource("7_ulst7")]
-position = Vector2(1038, 359)
+position = Vector2(1047, -2661)
 script = ExtResource("34_qir4x")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("38_62yx6")
+autoplay = true
 
 [connection signal="body_entered" from="NPC/ELPAPA/Area2D" to="NPC/ELPAPA/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="NPC/ELPAPA/Area2D" to="NPC/ELPAPA/Area2D" method="_on_body_exited"]

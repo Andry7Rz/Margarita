@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://brbxkjnnlp87"]
+[gd_scene load_steps=14 format=3 uid="uid://brbxkjnnlp87"]
 
 [ext_resource type="Script" uid="uid://bjwr4uq1xql0c" path="res://Scenes/dialogo_escena/balloon.gd" id="1_36de5"]
 [ext_resource type="FontFile" uid="uid://cbxsw8kmhrc1t" path="res://Dialogos/font/Early GameBoy.ttf" id="2_306mh"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
+[ext_resource type="AudioStream" uid="uid://bmuf3bcn4guny" path="res://recursos/musica/bleep030.wav" id="5_55qyn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -202,6 +203,10 @@ text = "Response example"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+
+[node name="SonidoVoz" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_55qyn")
+volume_db = 15.0
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="Balloon/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

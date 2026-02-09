@@ -3149,7 +3149,6 @@ scale = Vector2(0.19999997, 0.14950001)
 texture = ExtResource("25_kqui2")
 
 [node name="configuracion de iluminacion" type="Node2D" parent="."]
-visible = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="configuracion de iluminacion"]
 color = Color(0.58, 0.58, 0.52779996, 1)

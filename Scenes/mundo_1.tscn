@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://dmrxsroi46noo"]
+[gd_scene load_steps=33 format=4 uid="uid://dmrxsroi46noo"]
 
 [ext_resource type="Texture2D" uid="uid://clr7s1x1wy4mf" path="res://recursos/Fondo_Mundo_1/1.png" id="1_fkn2t"]
 [ext_resource type="Texture2D" uid="uid://dnxsin4qfacpg" path="res://recursos/Fondo_Mundo_1/2.png" id="2_dhq3p"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d17talh4l0ree" path="res://recursos/criaturas/tortuga/Walk.png" id="9_uueh3"]
 [ext_resource type="Script" uid="uid://da500d1i8kfgm" path="res://Script/Gravedad_invertida.gd" id="10_mtb4q"]
 [ext_resource type="PackedScene" uid="uid://d3o2kyg66nthc" path="res://assetss/cannon.tscn" id="11_7b3vf"]
+[ext_resource type="AudioStream" uid="uid://cqlcv6augbh8y" path="res://recursos/musica/Música de Mario Galaxy - Galaxia Playa Verde.mp3" id="12_8m502"]
 
 [sub_resource type="Gradient" id="Gradient_uueh3"]
 offsets = PackedFloat32Array(0, 0.0078125, 0.1328125, 0.2578125, 0.4296875, 0.6484375, 0.9296875, 1)
@@ -1900,3 +1901,7 @@ shape = SubResource("CapsuleShape2D_mtb4q")
 
 [node name="Cannon" parent="." instance=ExtResource("11_7b3vf")]
 position = Vector2(178, 189)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_8m502")
+autoplay = true
