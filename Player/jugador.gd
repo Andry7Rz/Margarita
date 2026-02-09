@@ -46,6 +46,9 @@ var esta_hablando = false
 var zoom_normal = Vector2(3, 3)
 var zoom_amplio = Vector2(1, 1)
 
+
+
+
 func _physics_process(delta: float) -> void:
 	# BLOQUEO POR DIÁLOGO
 	# Si está hablando, solo aplicamos gravedad y actualizamos animaciones

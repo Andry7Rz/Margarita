@@ -3149,6 +3149,7 @@ scale = Vector2(0.19999997, 0.14950001)
 texture = ExtResource("25_kqui2")
 
 [node name="configuracion de iluminacion" type="Node2D" parent="."]
+visible = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="configuracion de iluminacion"]
 color = Color(0.58, 0.58, 0.52779996, 1)
@@ -3160,7 +3161,7 @@ color = Color(0.49747366, 0.49747366, 0.49747366, 1)
 texture = SubResource("GradientTexture2D_wawvb")
 
 [node name="luz_sol2" type="PointLight2D" parent="configuracion de iluminacion"]
-position = Vector2(3368, -242.99998)
+position = Vector2(3393, -126)
 scale = Vector2(26.703125, 27.484377)
 color = Color(0.49747366, 0.49747366, 0.49747366, 1)
 texture = SubResource("GradientTexture2D_wawvb")

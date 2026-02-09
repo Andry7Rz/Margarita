@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dwlfeswalxhbt"
+path="res://.godot/imported/MAMA.dialogue-3e36db528ba0d3af01a410619ae3685a.tres"
+
+[deps]
+
+source_file="res://Dialogos/MAMA.dialogue"
+dest_files=["res://.godot/imported/MAMA.dialogue-3e36db528ba0d3af01a410619ae3685a.tres"]
+
+[params]
+
+defaults=true

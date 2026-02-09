@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dw3vgb0tkdo5m"
+path="res://.godot/imported/ANGE.dialogue-be3a48eedb0fd9e82ba4ad774139bdfa.tres"
+
+[deps]
+
+source_file="res://Dialogos/ANGE.dialogue"
+dest_files=["res://.godot/imported/ANGE.dialogue-be3a48eedb0fd9e82ba4ad774139bdfa.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bdvvv46lmsm8j"
+path="res://.godot/imported/PESQUERO.dialogue-23d9b1014e0cffd9d4d21fd31cd4ed17.tres"
+
+[deps]
+
+source_file="res://Dialogos/PESQUERO.dialogue"
+dest_files=["res://.godot/imported/PESQUERO.dialogue-23d9b1014e0cffd9d4d21fd31cd4ed17.tres"]
+
+[params]
+
+defaults=true

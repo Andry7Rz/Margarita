@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://brm5j33r8rnhs"
+path="res://.godot/imported/PIRLO.dialogue-b2dd0e400d4d8df3604f1cb328803eb6.tres"
+
+[deps]
+
+source_file="res://Dialogos/PIRLO.dialogue"
+dest_files=["res://.godot/imported/PIRLO.dialogue-b2dd0e400d4d8df3604f1cb328803eb6.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnxon87bjq7jw"]
+
+[ext_resource type="Texture2D" uid="uid://vhpn5pirbaex" path="res://recursos/sprites/menu.png" id="1_1rerr"]
+[ext_resource type="Script" uid="uid://kca3edl52qnf" path="res://Scenes/menu.gd" id="1_xhh6f"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xhh6f")
+
+[node name="Menu" type="Sprite2D" parent="."]
+position = Vector2(962, 540)
+scale = Vector2(1.3607955, 1.40625)
+texture = ExtResource("1_1rerr")
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_left = 883.0
+offset_top = 204.0
+offset_right = 1089.0
+offset_bottom = 244.0
+
+[node name="Button" type="Button" parent="BoxContainer"]
+layout_mode = 2
+text = "hjhjkhkhjhkhj"
