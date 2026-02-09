@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://btsji877x3dou"]
+[gd_scene load_steps=53 format=4 uid="uid://btsji877x3dou"]
 
 [ext_resource type="Texture2D" uid="uid://ce16nnkqioorr" path="res://Tiles/Tileset/tileset.png" id="1_o08vn"]
 [ext_resource type="Texture2D" uid="uid://3wkukp3rk3us" path="res://Tiles/Fondo_Lobby/1.png" id="1_ruji2"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" uid="uid://il7o5fvrj1xv" path="res://Script/antorchas.gd" id="28_wawvb"]
 [ext_resource type="Script" uid="uid://b8hvwagt38pys" path="res://Scenes/antorchas.gd" id="29_gut7a"]
 [ext_resource type="Texture2D" uid="uid://c54lpkoucdkdc" path="res://recursos/sprites/sprite-personaje-elpapa.png" id="30_ledmy"]
+[ext_resource type="AudioStream" uid="uid://coqudoaxxweev" path="res://recursos/musica/Super Mario World OST - Wandering The Plains - retrovgnamusic.mp3" id="37_xn1rr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1updj"]
 texture = ExtResource("1_o08vn")
@@ -3232,6 +3233,10 @@ texture = SubResource("GradientTexture2D_ledmy")
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("37_xn1rr")
+autoplay = true
 
 [connection signal="body_entered" from="NPC/ELPAPA/Area2D" to="NPC/ELPAPA/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="NPC/ELPAPA/Area2D" to="NPC/ELPAPA/Area2D" method="_on_body_exited"]

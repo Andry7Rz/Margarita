@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d2xxjxd40pmbx" path="res://recursos/sprites/pivote.png" id="3_y668d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pdnga"]
-radius = 7.071068
+radius = 12.0
 
 [node name="Cannon" type="Node2D"]
 
