@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://byvsf0ms4x5f8"
+path="res://.godot/imported/Lanchero.dialogue-4ad2d69896c9ca2c61dbb43b62ac01f1.tres"
+
+[deps]
+
+source_file="res://Dialogos/Lanchero.dialogue"
+dest_files=["res://.godot/imported/Lanchero.dialogue-4ad2d69896c9ca2c61dbb43b62ac01f1.tres"]
+
+[params]
+
+defaults=true

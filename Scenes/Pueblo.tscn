@@ -21,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://86yi27t8e1gq" path="res://Tiles/Decoracion/house3.png" id="14_h01og"]
 [ext_resource type="PackedScene" uid="uid://bq65rh5o1w6qy" path="res://Scenes/scena_!.tscn" id="18_h01og"]
 [ext_resource type="Texture2D" uid="uid://c3846dcb0j1cv" path="res://recursos/sprites/sprite-lancha.png" id="20_yow8p"]
-[ext_resource type="Texture2D" uid="uid://c5usd510j1gx2" path="res://recursos/sprites/sprite-personaje-lanchero.png" id="21_h1rpr"]
 [ext_resource type="Script" uid="uid://b4wwqa1v8bid4" path="res://assetss/SCRIPT_DE_DIALOGOS/MAMA.gd" id="21_kcasr"]
 [ext_resource type="Texture2D" uid="uid://btygfeqg50y8v" path="res://recursos/sprites/sprite-personaje-buzo.png" id="22_ihubg"]
 [ext_resource type="Texture2D" uid="uid://d1nklkiejrjai" path="res://recursos/sprites/sprite-personaje-niña.png" id="23_667kf"]
@@ -35,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://cirbqp24lb5xk" path="res://recursos/sprites/signo1.png" id="28_o8yfv"]
 [ext_resource type="Script" uid="uid://vwrv3d63y41j" path="res://assetss/SCRIPT_DE_DIALOGOS/ange.gd" id="29_e834d"]
 [ext_resource type="Texture2D" uid="uid://b1lw1uhtqqf4v" path="res://recursos/sprites/sprite-personaje-lamama.png" id="29_qir4x"]
+[ext_resource type="Script" uid="uid://be0qlav77ruua" path="res://assetss/SCRIPT_DE_DIALOGOS/Lanchero.gd" id="31_62yx6"]
 [ext_resource type="Script" uid="uid://1eivexv21xl8" path="res://assetss/SCRIPT_DE_DIALOGOS/Tutorial_HERMANA.gd" id="31_e834d"]
 [ext_resource type="Script" uid="uid://daw62e720sukl" path="res://Script/portal_menu.gd" id="34_qir4x"]
 [ext_resource type="AudioStream" uid="uid://cuybjm8fjdthp" path="res://recursos/musica/Olas De Pixel.mp3" id="38_62yx6"]
@@ -2591,11 +2591,30 @@ position = Vector2(5.6266785e-05, -50.69759)
 scale = Vector2(2.036827, 1.8481014)
 texture = ExtResource("28_o8yfv")
 
+[node name="Lanchero" type="Sprite2D" parent="NPC"]
+position = Vector2(2348, 448)
+scale = Vector2(-1.0342759, 1.0848643)
+texture = ExtResource("26_kcasr")
+
+[node name="Area2D" type="Area2D" parent="NPC/Lanchero"]
+script = ExtResource("31_62yx6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Lanchero/Area2D"]
+position = Vector2(45.442398, -2.7653594)
+scale = Vector2(0.99999976, 0.9999998)
+shape = SubResource("RectangleShape2D_x04uc")
+
+[node name="ExclamationMark" type="Sprite2D" parent="NPC/Lanchero/Area2D"]
+visible = false
+position = Vector2(5.6266785e-05, -50.69759)
+scale = Vector2(2.036827, 1.8481014)
+texture = ExtResource("28_o8yfv")
+
 [node name="Area2D" parent="." instance=ExtResource("7_ulst7")]
 position = Vector2(4600, 607)
 Escena = "Pueblo"
 
-[node name="Player" parent="." groups=["jugador"] instance=ExtResource("6_xpbrw")]
+[node name="Player" parent="." instance=ExtResource("6_xpbrw")]
 position = Vector2(-4215, -306)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -2648,10 +2667,6 @@ position = Vector2(1055, 426)
 scale = Vector2(2.921874, 2.5468748)
 texture = ExtResource("20_yow8p")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Node2D"]
-position = Vector2(911, 437)
-texture = ExtResource("21_h1rpr")
-
 [node name="Sprite2D3" type="Sprite2D" parent="Node2D"]
 position = Vector2(1403, 754)
 texture = ExtResource("22_ihubg")
@@ -2681,3 +2696,5 @@ autoplay = true
 [connection signal="body_exited" from="NPC/Pesquero/Area2D" to="NPC/Pesquero/Area2D" method="_on_body_exited"]
 [connection signal="body_entered" from="NPC/ANGE/Area2D" to="NPC/ANGE/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="NPC/ANGE/Area2D" to="NPC/ANGE/Area2D" method="_on_body_exited"]
+[connection signal="body_entered" from="NPC/Lanchero/Area2D" to="NPC/Lanchero/Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="NPC/Lanchero/Area2D" to="NPC/Lanchero/Area2D" method="_on_body_exited"]
