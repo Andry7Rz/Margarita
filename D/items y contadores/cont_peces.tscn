@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7dlogf4ylyeu"]
+
+[ext_resource type="Script" uid="uid://bx77pkomic8a7" path="res://D/codigo/cont_peces.gd" id="1_q7omt"]
+[ext_resource type="Texture2D" uid="uid://encckmrv4i5q" path="res://recursos/sprites/sprite pez1.png" id="1_ug4nd"]
+[ext_resource type="FontFile" uid="uid://cv5lb685pqesi" path="res://D/recursos/PixelAE-Bold.ttf" id="2_d3un3"]
+
+[sub_resource type="GDScript" id="GDScript_1pbs7"]
+
+[node name="ContPeces" type="CanvasLayer"]
+script = ExtResource("1_q7omt")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 1704.0
+offset_top = 23.0
+offset_right = 1768.0
+offset_bottom = 88.0
+texture = ExtResource("1_ug4nd")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 1780.0
+offset_top = 9.0
+offset_right = 1820.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("2_d3un3")
+theme_override_font_sizes/font_size = 60
+text = "x"
+
+[node name="etiqueta_cant_pez" type="Label" parent="."]
+offset_left = 1821.0
+offset_top = 15.0
+offset_right = 1881.0
+offset_bottom = 105.0
+theme_override_fonts/font = ExtResource("2_d3un3")
+theme_override_font_sizes/font_size = 60
+text = "0"
+script = SubResource("GDScript_1pbs7")

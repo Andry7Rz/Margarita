@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://bome2cc6u3vdy"]
+
+[ext_resource type="Script" uid="uid://cu7yia1prp6vi" path="res://D/codigo/cont_oxigeno.gd" id="1_i3r1a"]
+[ext_resource type="Texture2D" uid="uid://bprmbjlwq36cw" path="res://D/recursos/barra_oxigeno6.png" id="2_037t1"]
+[ext_resource type="Texture2D" uid="uid://crjtwsrqwx0uj" path="res://D/recursos/barra_oxigeno5.png" id="3_a13i4"]
+[ext_resource type="Texture2D" uid="uid://b21wb42g4e0l1" path="res://D/recursos/barra_oxigeno4.png" id="4_cppkq"]
+[ext_resource type="Texture2D" uid="uid://b5i7oehkeyyt5" path="res://D/recursos/barra_oxigeno3.png" id="5_n43mh"]
+[ext_resource type="Texture2D" uid="uid://bnayuxxvu83rn" path="res://D/recursos/barra_oxigeno2.png" id="6_3l8xl"]
+[ext_resource type="Texture2D" uid="uid://c7jf3wfa451ej" path="res://D/recursos/barra_oxigeno1.png" id="7_uurd0"]
+
+[node name="ContOxigeno" type="CanvasLayer"]
+script = ExtResource("1_i3r1a")
+
+[node name="oxigeno6" type="Sprite2D" parent="."]
+texture = ExtResource("2_037t1")
+
+[node name="oxigeno5" type="Sprite2D" parent="."]
+texture = ExtResource("3_a13i4")
+
+[node name="oxigeno4" type="Sprite2D" parent="."]
+texture = ExtResource("4_cppkq")
+
+[node name="oxigeno3" type="Sprite2D" parent="."]
+texture = ExtResource("5_n43mh")
+
+[node name="oxigeno2" type="Sprite2D" parent="."]
+texture = ExtResource("6_3l8xl")
+
+[node name="oxigeno1" type="Sprite2D" parent="."]
+texture = ExtResource("7_uurd0")

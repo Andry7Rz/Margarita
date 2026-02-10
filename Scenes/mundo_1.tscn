@@ -1,6 +1,7 @@
-[gd_scene load_steps=32 format=4 uid="uid://dmrxsroi46noo"]
+[gd_scene load_steps=35 format=4 uid="uid://dmrxsroi46noo"]
 
 [ext_resource type="Texture2D" uid="uid://clr7s1x1wy4mf" path="res://recursos/Fondo_Mundo_1/1.png" id="1_fkn2t"]
+[ext_resource type="Script" uid="uid://bbcd34inues3c" path="res://D/codigo/game_manager_punt.gd" id="1_y7bq8"]
 [ext_resource type="Texture2D" uid="uid://dnxsin4qfacpg" path="res://recursos/Fondo_Mundo_1/2.png" id="2_dhq3p"]
 [ext_resource type="Texture2D" uid="uid://ce16nnkqioorr" path="res://Tiles/Tileset/tileset.png" id="5_fcsx3"]
 [ext_resource type="Texture2D" uid="uid://c2rs03ul4br7g" path="res://Tiles/Tileset/free tile set Finished.png" id="6_mx542"]
@@ -16,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://cr1apwxshdhsj" path="res://recursos/sprites/gravedad invertida.png" id="14_lyqy0"]
 [ext_resource type="Texture2D" uid="uid://dbeb7pl368nwj" path="res://recursos/sprites/gravedad normal.png" id="15_8t848"]
 [ext_resource type="Texture2D" uid="uid://cirbqp24lb5xk" path="res://recursos/sprites/signo1.png" id="16_8t848"]
+[ext_resource type="PackedScene" uid="uid://u307ccwbkw7s" path="res://D/items y contadores/peces_item.tscn" id="17_6hrbf"]
+[ext_resource type="PackedScene" uid="uid://b7dlogf4ylyeu" path="res://D/items y contadores/cont_peces.tscn" id="19_857x3"]
 
 [sub_resource type="Gradient" id="Gradient_uueh3"]
 offsets = PackedFloat32Array(0, 0.0078125, 0.1328125, 0.2578125, 0.4296875, 0.6484375, 0.9296875, 1)
@@ -1761,6 +1764,10 @@ turbulence_noise_scale = 10.0
 
 [node name="mundo1" type="Node2D"]
 
+[node name="GameManagerPunt" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_y7bq8")
+
 [node name="fondo" type="Node2D" parent="."]
 
 [node name="Parallax2D" type="Parallax2D" parent="fondo"]
@@ -1894,11 +1901,9 @@ position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_4f7ws")
 
 [node name="Corriente" type="Node2D" parent="."]
-visible = false
 position = Vector2(1694, 66)
 
 [node name="Area2D" type="Area2D" parent="Corriente"]
-visible = false
 position = Vector2(-1672, 38)
 gravity_space_override = 3
 gravity_point_center = Vector2(0, -1)
@@ -1917,7 +1922,6 @@ lifetime = 2.0999999999999996
 process_material = SubResource("ParticleProcessMaterial_8m502")
 
 [node name="Area2D2" type="Area2D" parent="Corriente"]
-visible = false
 position = Vector2(-1705, -238)
 gravity_space_override = 3
 gravity_point_center = Vector2(0, -1)
@@ -1936,7 +1940,6 @@ lifetime = 2.0999999999999996
 process_material = SubResource("ParticleProcessMaterial_8m502")
 
 [node name="Area2D3" type="Area2D" parent="Corriente"]
-visible = false
 position = Vector2(-1146, -272)
 gravity_space_override = 3
 gravity_point_center = Vector2(0, -1)
@@ -1973,3 +1976,12 @@ texture = ExtResource("14_lyqy0")
 position = Vector2(-1464, 67)
 scale = Vector2(2.9999998, 2.4375)
 texture = ExtResource("16_8t848")
+
+[node name="PecesItem" parent="." instance=ExtResource("17_6hrbf")]
+position = Vector2(-873, -75)
+
+[node name="PecesItem2" parent="." instance=ExtResource("17_6hrbf")]
+position = Vector2(-674, 42)
+
+[node name="ContPeces" parent="." instance=ExtResource("19_857x3")]
+visible = false

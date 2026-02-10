@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://bps2l7nv4vjt7"]
+
+[ext_resource type="Script" uid="uid://dufmukce326ac" path="res://D/codigo/hud.gd" id="1_8cvc7"]
+[ext_resource type="Texture2D" uid="uid://c7jf3wfa451ej" path="res://D/recursos/barra_oxigeno1.png" id="1_pmm2b"]
+[ext_resource type="Texture2D" uid="uid://bnayuxxvu83rn" path="res://D/recursos/barra_oxigeno2.png" id="3_artvf"]
+[ext_resource type="Texture2D" uid="uid://b5i7oehkeyyt5" path="res://D/recursos/barra_oxigeno3.png" id="4_vhxrb"]
+[ext_resource type="Texture2D" uid="uid://b21wb42g4e0l1" path="res://D/recursos/barra_oxigeno4.png" id="5_qt6s8"]
+[ext_resource type="Texture2D" uid="uid://crjtwsrqwx0uj" path="res://D/recursos/barra_oxigeno5.png" id="6_bmy8f"]
+[ext_resource type="Texture2D" uid="uid://bprmbjlwq36cw" path="res://D/recursos/barra_oxigeno6.png" id="7_67mqi"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_8cvc7")
+texturas_vidas = Array[Texture2D]([ExtResource("1_pmm2b"), ExtResource("3_artvf"), ExtResource("4_vhxrb"), ExtResource("5_qt6s8"), ExtResource("6_bmy8f"), ExtResource("7_67mqi")])
+
+[node name="ContadorImagen" type="TextureRect" parent="."]
+offset_left = -8.0
+offset_top = -32.0
+offset_right = 56.0
+offset_bottom = 32.0
+texture = ExtResource("1_pmm2b")
