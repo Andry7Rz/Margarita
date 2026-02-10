@@ -34,6 +34,9 @@ extends CharacterBody2D
 @export var water_float_force = -80.0
 @export var water_sink_speed = 100.0
 
+# --- SEÑALES DEL JUGADOR Y EL ENTORNO ---
+
+signal cambio_vida(nueva_cantidad) #Señal para conectar con el HUD
 
 # --- VARIABLES INTERNAS ---
 @onready var sprite = $AnimatedSprite2D 
@@ -46,12 +49,22 @@ var stamina = max_stamina
 var is_in_water = false
 var gravity_direction = 1.0 
 var esta_hablando = false
+var vidas_maximas = 5
+var vidas_actuales = 5
+var es_invulnerable = false   #variable para saber si podemos recibir daño
 
 # --- VARIABLES DE CÁMARA ---
 @onready var camera = $Camera2D 
 var zoom_normal = Vector2(3, 3)
 var zoom_amplio = Vector2(1, 1)
 
+func _ready() -> void:
+	# Inicializamos las vidas al máximo
+	vidas_actuales = vidas_maximas
+	# Esperamos un instante pequeñito para asegurar que el HUD esté listo
+	await get_tree().create_timer(0.1).timeout
+	# Avisamos al HUD para que ponga la imagen de 5 vidas al empezar
+	cambio_vida.emit(vidas_actuales)
 
 func _physics_process(delta: float) -> void:
 	# BLOQUEO POR DIÁLOGO
@@ -242,3 +255,40 @@ func launch_from_cannon(impulse_vector):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
+
+func recibir_daño():
+	
+	# Si ya somos invulnerables, NO hacemos nada (salimos de la función)
+	if es_invulnerable:
+		return
+	
+	# Solo restamos si estamos vivos
+	if vidas_actuales > 0:
+		vidas_actuales -= 1
+		
+		# ¡AVISAMOS AL HUD! Aquí ocurre la magia.
+		cambio_vida.emit(vidas_actuales)
+		print("Vidas restantes: ", vidas_actuales)
+		
+		# --- INICIO DE LA PROTECCIÓN ---
+		print("¡Au! Iniciando invulnerabilidad...")
+		es_invulnerable = true
+		
+		# Opcional: Hacer que el personaje parpadee (cambiando su opacidad)
+		modulate.a = 0.5 
+		
+		# Creamos un temporizador temporal de 1.5 segundos
+		await get_tree().create_timer(1.5).timeout
+		
+		# --- FIN DE LA PROTECCIÓN ---
+		es_invulnerable = false
+		modulate.a = 1.0 # Volvemos a ser visibles al 100%
+		print("Ya te pueden pegar otra vez.")
+		
+		if vidas_actuales <= 0:
+			morir()
+
+func morir():  #conectar mas adelante con escena de game over
+	print("Game Over")
+	# Reinicia la escena actual
+	get_tree().reload_current_scene()

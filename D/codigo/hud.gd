@@ -14,3 +14,7 @@ func actualizar_contador(cantidad_vidas):
 	
 	# Cambiamos la textura actual por la que corresponde al número de vidas
 	contador_visual.texture = texturas_vidas[indice_seguro]
+
+
+func _on_player_cambio_vida(nueva_cantidad: Variant) -> void:
+	pass # Replace with function body.

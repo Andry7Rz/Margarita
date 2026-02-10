@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmtkoavq4j41e"]
+
+[ext_resource type="Texture2D" uid="uid://cha3pt0r0fiyt" path="res://recursos/sprites/sprite-coral-1.png" id="1_g0aeb"]
+[ext_resource type="Script" uid="uid://cbe8y8fpxdas7" path="res://D/codigo/coral_filoso.gd" id="1_vhmgi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhmgi"]
+size = Vector2(46, 50)
+
+[node name="CoralFiloso" type="Area2D"]
+script = ExtResource("1_vhmgi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_g0aeb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vhmgi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
