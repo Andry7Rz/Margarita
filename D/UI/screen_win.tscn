@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4f14odl53agi"]
+
+[ext_resource type="Script" uid="uid://ccuy0qkq56ne" path="res://D/codigo/screen_win.gd" id="1_n825l"]
+[ext_resource type="Texture2D" uid="uid://3wkukp3rk3us" path="res://Tiles/Fondo_Lobby/1.png" id="2_wbvu1"]
+[ext_resource type="FontFile" uid="uid://cv5lb685pqesi" path="res://D/recursos/PixelAE-Bold.ttf" id="3_n4obg"]
+[ext_resource type="AudioStream" uid="uid://d1guiej383mgd" path="res://recursos/musica/371844__mrthenoronha__bossa-nova-game-theme-loop.wav" id="4_wbvu1"]
+
+[node name="ScreenWin" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n825l")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wbvu1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 800
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 800
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_n4obg")
+theme_override_font_sizes/font_size = 90
+text = "Haz ganado"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="InfoPez" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_n4obg")
+theme_override_font_sizes/font_size = 50
+text = "Informacion del pez"
+
+[node name="GotoMenuInicio" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_n4obg")
+theme_override_font_sizes/font_size = 50
+text = "Ir al Menu de Inicio"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wbvu1")
+autoplay = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/InfoPez" to="." method="_on_info_pez_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GotoMenuInicio" to="." method="_on_goto_menu_inicio_pressed"]
