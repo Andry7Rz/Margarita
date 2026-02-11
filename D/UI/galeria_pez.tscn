@@ -1,0 +1,178 @@
+[gd_scene load_steps=14 format=3 uid="uid://bq84tktjsfonn"]
+
+[ext_resource type="Texture2D" uid="uid://dhm1ohmbaxhhl" path="res://D/recursos/Middle.png" id="1_gw76r"]
+[ext_resource type="Script" uid="uid://gns8q8xlqs2m" path="res://D/codigo/galeria_pez.gd" id="1_i65ji"]
+[ext_resource type="Texture2D" uid="uid://dbm4dx0oc6cib" path="res://recursos/Fondo_Mundo_1/3.png" id="2_i65ji"]
+[ext_resource type="Texture2D" uid="uid://dmafee7tqlpmf" path="res://recursos/Fondo_Mundo_1/5.png" id="3_0me2o"]
+[ext_resource type="Texture2D" uid="uid://dnxsin4qfacpg" path="res://recursos/Fondo_Mundo_1/2.png" id="4_mnem5"]
+[ext_resource type="FontFile" uid="uid://cv5lb685pqesi" path="res://D/recursos/PixelAE-Bold.ttf" id="6_27gik"]
+[ext_resource type="Texture2D" uid="uid://dn8dlh4d7gkyy" path="res://D/recursos/pergamino.png" id="6_d82kn"]
+[ext_resource type="Texture2D" uid="uid://encckmrv4i5q" path="res://recursos/sprites/sprite pez1.png" id="7_pu0ns"]
+[ext_resource type="Texture2D" uid="uid://clk5db8ptmcpj" path="res://recursos/sprites/sprite pez2.png" id="8_8knl5"]
+[ext_resource type="Texture2D" uid="uid://dji7wpdkd3khv" path="res://recursos/sprites/sprite pez3.png" id="9_yanm6"]
+[ext_resource type="Texture2D" uid="uid://ykgwi8o60ojn" path="res://recursos/sprites/sprite pez4.png" id="10_cqpib"]
+[ext_resource type="AudioStream" uid="uid://c0c6i7ugdtcjt" path="res://recursos/musica/mrthenoronha_bossa-nova-game-theme-loop (online-audio-converter.com).mp3" id="12_d82kn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_px0py"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_pu0ns")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8knl5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yanm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cqpib")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="galeria_pez" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i65ji")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(2, -878)
+scale = Vector2(13.333334, 8.308333)
+texture = ExtResource("1_gw76r")
+centered = false
+region_rect = Rect2(0, 0, 1920, 1080)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(0, -184)
+scale = Vector2(3.3333335, 5.0185184)
+texture = ExtResource("2_i65ji")
+centered = false
+region_rect = Rect2(0, 0, 1920, 1080)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+scale = Vector2(3.3333335, 3.3456793)
+texture = ExtResource("3_0me2o")
+centered = false
+region_rect = Rect2(0, 0, 1920, 1080)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+scale = Vector2(3.3333335, 3.3456793)
+texture = ExtResource("4_mnem5")
+centered = false
+region_rect = Rect2(0, 0, 1920, 1080)
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2(8, 70)
+scale = Vector2(19.203125, 14.890624)
+texture = ExtResource("6_d82kn")
+centered = false
+region_rect = Rect2(0, 0, 1920, 1080)
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(1502, 550)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_px0py")
+autoplay = "default"
+frame_progress = 0.43300647
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 1300
+theme_override_constants/margin_top = 950
+theme_override_constants/margin_right = 250
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="menu_principal" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_27gik")
+theme_override_font_sizes/font_size = 50
+text = "Regresar al Menu Principal"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_d82kn")
+autoplay = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 174.0
+offset_top = 259.0
+offset_right = -1246.0
+offset_bottom = -252.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_27gik")
+theme_override_font_sizes/font_size = 23
+text = "El pez loro arcoíris ( Scarus guacamaia ) 
+es una especie de pez de la familia 
+Scaridae. El pez loro arcoíris tiene 
+una distribución relativamente amplia 
+en el Atlántico occidental, y se encuentra 
+desde Bermudas, pasando por el sur de 
+Florida, las Bahamas y el Caribe, hasta 
+Venezuela. Habita arrecifes de coral, 
+manglares y praderas de pastos marinos 
+en aguas poco profundas, a profundidades 
+de 3 a 25 m. Scarus guacamaia se clasificó 
+anteriormente como vulnerable debido a 
+la sobrepesca y la pérdida de hábitat , pero "
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 686.0
+offset_top = 255.0
+offset_right = -837.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_27gik")
+theme_override_font_sizes/font_size = 23
+text = "dado que los datos disponibles 
+actualmente no permiten estimar 
+la disminución de su 
+población, la UICN la considera 
+ahora casi amenazada . Es 
+relativamente rara en la mayor 
+parte de su área de distribución, 
+pero es más común en Bermudas. 
+El pez loro arcoíris se captura 
+ampliamente en la pesca de 
+subsistencia en muchas partes 
+del Caribe."
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/menu_principal" to="." method="_on_menu_principal_pressed"]

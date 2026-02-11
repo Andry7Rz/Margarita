@@ -6,6 +6,9 @@ extends CanvasLayer
 # 2. Referencia al nodo que muestra la imagen
 @onready var contador_visual = $ContadorImagen
 
+func _ready() -> void:
+	visible = true
+
 func actualizar_contador(cantidad_vidas):
 	# PROTECCIÓN:
 	# Nos aseguramos de que el número no sea menor a 0 ni mayor a 5

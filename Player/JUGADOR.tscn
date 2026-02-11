@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://b872vtxo486j4"]
+[gd_scene load_steps=57 format=3 uid="uid://b872vtxo486j4"]
 
 [ext_resource type="Script" uid="uid://pmej8a6u06y1" path="res://Player/jugador.gd" id="1_nu1ia"]
 [ext_resource type="Texture2D" uid="uid://ebdsmrlxxcgm" path="res://D/sprites player/Fall (32x32).png" id="2_uvyug"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://caple2ogy17g2" path="res://D/sprites player/Wall Jump (32x32).png" id="6_ntgr7"]
 [ext_resource type="AudioStream" uid="uid://bs8q00dnymmha" path="res://Player/salto.wav" id="9_ntgr7"]
 [ext_resource type="AudioStream" uid="uid://bh3f7lyn7af5g" path="res://Player/dash.wav" id="10_mf6js"]
+[ext_resource type="AudioStream" uid="uid://d4bfxpxl3x8n2" path="res://recursos/musica/Hit.wav" id="11_mf6js"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nu1ia"]
 size = Vector2(16, 20)
@@ -373,3 +374,7 @@ stream = ExtResource("9_ntgr7")
 
 [node name="SonidoDash" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_mf6js")
+
+[node name="SonidoDaño" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_mf6js")
+volume_db = 9.0

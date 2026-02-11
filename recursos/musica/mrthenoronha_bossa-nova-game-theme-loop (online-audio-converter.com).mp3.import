@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c0c6i7ugdtcjt"
+path="res://.godot/imported/mrthenoronha_bossa-nova-game-theme-loop (online-audio-converter.com).mp3-7861cb2146d6cfe3a5573796a70d2844.mp3str"
+
+[deps]
+
+source_file="res://recursos/musica/mrthenoronha_bossa-nova-game-theme-loop (online-audio-converter.com).mp3"
+dest_files=["res://.godot/imported/mrthenoronha_bossa-nova-game-theme-loop (online-audio-converter.com).mp3-7861cb2146d6cfe3a5573796a70d2844.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

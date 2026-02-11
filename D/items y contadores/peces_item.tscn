@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://u307ccwbkw7s"]
+[gd_scene load_steps=9 format=3 uid="uid://u307ccwbkw7s"]
 
 [ext_resource type="Script" uid="uid://bbye1fyryaurx" path="res://D/codigo/peces_item.gd" id="1_dbug2"]
 [ext_resource type="Texture2D" uid="uid://encckmrv4i5q" path="res://recursos/sprites/sprite pez1.png" id="1_h3ym0"]
 [ext_resource type="Texture2D" uid="uid://clk5db8ptmcpj" path="res://recursos/sprites/sprite pez2.png" id="2_dbug2"]
 [ext_resource type="Texture2D" uid="uid://dji7wpdkd3khv" path="res://recursos/sprites/sprite pez3.png" id="3_jdnaq"]
 [ext_resource type="Texture2D" uid="uid://ykgwi8o60ojn" path="res://recursos/sprites/sprite pez4.png" id="4_igh14"]
+[ext_resource type="AudioStream" uid="uid://c47x8g0bqjcq8" path="res://recursos/musica/Pickup.wav" id="6_jdnaq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p8165"]
 animations = [{
@@ -41,5 +42,9 @@ frame_progress = 0.9930723
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6ssrw")
+
+[node name="SonidoPez" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_jdnaq")
+volume_db = 8.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

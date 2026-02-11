@@ -11,6 +11,7 @@ extends CharacterBody2D
 # Asegúrate de que los nodos hijos se llamen exactamente así en tu escena
 @onready var sonido_salto = $SonidoSalto
 @onready var sonido_dash = $SonidoDash
+@onready var sonido_daño = $SonidoDaño
 
 @export_category("Salto Celeste")
 @export var jump_force = -300.0 
@@ -266,6 +267,9 @@ func recibir_daño():
 	if vidas_actuales > 0:
 		vidas_actuales -= 1
 		
+		# --- SONIDO DAÑO ---
+		sonido_daño.play()
+		
 		# ¡AVISAMOS AL HUD! Aquí ocurre la magia.
 		cambio_vida.emit(vidas_actuales)
 		print("Vidas restantes: ", vidas_actuales)
@@ -291,4 +295,4 @@ func recibir_daño():
 func morir():  #conectar mas adelante con escena de game over
 	print("Game Over")
 	# Reinicia la escena actual
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://D/UI/screen_lose.tscn")

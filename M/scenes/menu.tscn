@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cf0ojyx15xxbs" path="res://M/scripts/menu.gd" id="1_vjb58"]
 [ext_resource type="Texture2D" uid="uid://bnevijp2pwbk4" path="res://M/images/1769209768545.png" id="1_yqeox"]
 [ext_resource type="FontFile" uid="uid://cv5lb685pqesi" path="res://D/recursos/PixelAE-Bold.ttf" id="3_bm7wv"]
-[ext_resource type="AudioStream" uid="uid://d1guiej383mgd" path="res://recursos/musica/371844__mrthenoronha__bossa-nova-game-theme-loop.wav" id="3_niwjj"]
+[ext_resource type="AudioStream" uid="uid://c0c6i7ugdtcjt" path="res://recursos/musica/mrthenoronha_bossa-nova-game-theme-loop (online-audio-converter.com).mp3" id="4_bm7wv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d7r87"]
 bg_color = Color(0.83137256, 0.49411765, 0.27450982, 1)
@@ -73,6 +73,7 @@ text = "TUTORIAL
 "
 
 [node name="opciones" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bm7wv")
 theme_override_font_sizes/font_size = 35
@@ -87,7 +88,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6cq3m")
 text = "SALIR"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_niwjj")
+stream = ExtResource("4_bm7wv")
 autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/jugar" to="." method="_on_jugar_pressed"]

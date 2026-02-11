@@ -17,8 +17,7 @@ func _ready() -> void:
 	tween.tween_property(musica_menu, "volume_db", 0.0, 2.0).set_trans(Tween.TRANS_SINE)
 
 func _on_info_pez_pressed() -> void:
-	#get_tree().change_scene_to_file()
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://D/UI/galeria_pez.tscn")
 
 
 func _on_goto_menu_inicio_pressed() -> void:

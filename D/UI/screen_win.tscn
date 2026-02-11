@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4f14odl53agi"]
+[gd_scene load_steps=9 format=3 uid="uid://c4f14odl53agi"]
 
 [ext_resource type="Script" uid="uid://ccuy0qkq56ne" path="res://D/codigo/screen_win.gd" id="1_n825l"]
+[ext_resource type="Texture2D" uid="uid://g08gtrj33c60" path="res://D/recursos/Ocean View Files/Layers/Noon/Back.png" id="2_38er6"]
 [ext_resource type="Texture2D" uid="uid://3wkukp3rk3us" path="res://Tiles/Fondo_Lobby/1.png" id="2_wbvu1"]
+[ext_resource type="Texture2D" uid="uid://cltrbejtvpj44" path="res://D/recursos/Ocean View Files/Layers/Noon/Middle.png" id="3_5ds1h"]
 [ext_resource type="FontFile" uid="uid://cv5lb685pqesi" path="res://D/recursos/PixelAE-Bold.ttf" id="3_n4obg"]
-[ext_resource type="AudioStream" uid="uid://d1guiej383mgd" path="res://recursos/musica/371844__mrthenoronha__bossa-nova-game-theme-loop.wav" id="4_wbvu1"]
+[ext_resource type="Texture2D" uid="uid://mvhmqywqknjy" path="res://Tiles/Fondo_Lobby/as.png" id="4_iy0vs"]
+[ext_resource type="Texture2D" uid="uid://dnxsin4qfacpg" path="res://recursos/Fondo_Mundo_1/2.png" id="5_i0krs"]
+[ext_resource type="AudioStream" uid="uid://c0c6i7ugdtcjt" path="res://recursos/musica/mrthenoronha_bossa-nova-game-theme-loop (online-audio-converter.com).mp3" id="8_38er6"]
 
 [node name="ScreenWin" type="Control"]
 layout_mode = 3
@@ -14,7 +18,39 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n825l")
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(5.842262, 4.6625)
+texture = ExtResource("2_38er6")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(981.5001, 559.5)
+scale = Vector2(13.5625, 4.6124997)
+texture = ExtResource("3_5ds1h")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(292, 931)
+scale = Vector2(1.6180555, 1.7669753)
+texture = ExtResource("4_iy0vs")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(34, 268)
+scale = Vector2(3.4114583, 3.419753)
+texture = ExtResource("5_i0krs")
+centered = false
+
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +59,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,7 +111,7 @@ theme_override_font_sizes/font_size = 50
 text = "Ir al Menu de Inicio"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_wbvu1")
+stream = ExtResource("8_38er6")
 autoplay = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/InfoPez" to="." method="_on_info_pez_pressed"]

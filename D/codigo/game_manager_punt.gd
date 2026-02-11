@@ -23,7 +23,7 @@ func finalizar_juego():
 	print("¡Felicidades! Has recolectado todos los peces.")
 	
 	# OPCIÓN A: Pausar el juego y mostrar mensaje en consola
-	get_tree().paused = true 
+	#get_tree().paused = true 
 	
 	# OPCIÓN B: Cambiar a una escena de "Victoria" (Descomenta y usa tu ruta)
-	# get_tree().change_scene_to_file("res://Escenas/PantallaVictoria.tscn")
+	get_tree().change_scene_to_file("res://D/UI/screen_win.tscn")
