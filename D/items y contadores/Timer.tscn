@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvhlkurtn1alb"]
+
+[ext_resource type="Script" uid="uid://cah50grgy1gek" path="res://D/codigo/timer.gd" id="1_8724s"]
+[ext_resource type="FontFile" uid="uid://cv5lb685pqesi" path="res://D/recursos/PixelAE-Bold.ttf" id="2_yqd00"]
+
+[node name="Timer" type="CanvasLayer"]
+script = ExtResource("1_8724s")
+
+[node name="ContadorTimer" type="Timer" parent="."]
+wait_time = 100.0
+one_shot = true
+autostart = true
+
+[node name="EtiquetaTiempo" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 936.0
+offset_top = 31.0
+offset_right = -759.0
+offset_bottom = -974.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_yqd00")
+theme_override_font_sizes/font_size = 50
+text = "TIMER"
+horizontal_alignment = 1
+
+[connection signal="timeout" from="ContadorTimer" to="." method="_on_contador_timer_timeout"]

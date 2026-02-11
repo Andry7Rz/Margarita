@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://dmrxsroi46noo"]
+[gd_scene load_steps=40 format=4 uid="uid://dmrxsroi46noo"]
 
 [ext_resource type="Texture2D" uid="uid://clr7s1x1wy4mf" path="res://recursos/Fondo_Mundo_1/1.png" id="1_fkn2t"]
 [ext_resource type="Script" uid="uid://bbcd34inues3c" path="res://D/codigo/game_manager_punt.gd" id="1_y7bq8"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://u307ccwbkw7s" path="res://D/items y contadores/peces_item.tscn" id="17_6hrbf"]
 [ext_resource type="PackedScene" uid="uid://b7dlogf4ylyeu" path="res://D/items y contadores/cont_peces.tscn" id="19_857x3"]
 [ext_resource type="PackedScene" uid="uid://bps2l7nv4vjt7" path="res://D/items y contadores/HUD.tscn" id="20_h8rm1"]
+[ext_resource type="PackedScene" uid="uid://dvhlkurtn1alb" path="res://D/items y contadores/Timer.tscn" id="25_palmt"]
 
 [sub_resource type="Gradient" id="Gradient_uueh3"]
 offsets = PackedFloat32Array(0, 0.0078125, 0.1328125, 0.2578125, 0.4296875, 0.6484375, 0.9296875, 1)
@@ -2057,6 +2058,9 @@ texture = ExtResource("4_j62ov")
 visible = false
 
 [node name="Hud" parent="." instance=ExtResource("20_h8rm1")]
+visible = false
+
+[node name="Timer" parent="." instance=ExtResource("25_palmt")]
 visible = false
 
 [node name="coral1" type="Sprite2D" parent="."]
