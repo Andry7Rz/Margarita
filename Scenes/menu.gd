@@ -19,6 +19,6 @@ func _on_texture_button_mundo_1_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/mundo_1.tscn")
 
 func _on_texture_button_salir_pressed() -> void:
-	print("Volviendo al menú...")
-	# Cambia esto por la ruta de tu menú principal
-	get_tree().change_scene_to_file("res://Scenes/MenuPrincipal.tscn")
+	print("Regresando al pueblo...")
+	Global.volver_desde_menu = true # Le avisamos al script Global
+	get_tree().change_scene_to_file("res://Scenes/Pueblo.tscn")

@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnxon87bjq7jw"]
+[gd_scene load_steps=7 format=3 uid="uid://dnxon87bjq7jw"]
 
 [ext_resource type="Script" uid="uid://kca3edl52qnf" path="res://Scenes/menu.gd" id="1_xhh6f"]
-[ext_resource type="Texture2D" uid="uid://c0p3u0w01hjuu" path="res://recursos/sprites/asd (1).png" id="2_cayip"]
-[ext_resource type="Texture2D" uid="uid://dc22j6xcsv4kc" path="res://recursos/sprites/icon.png" id="3_cayip"]
-[ext_resource type="Texture2D" uid="uid://cirbqp24lb5xk" path="res://recursos/sprites/signo1.png" id="4_158mb"]
+[ext_resource type="Texture2D" uid="uid://wwq5yxg4nhdf" path="res://recursos/sprites/Gemini_Generated_Image_pnfmebpnfmebpnfm (1).png" id="2_158mb"]
+[ext_resource type="Texture2D" uid="uid://b4wvwbget6ihh" path="res://recursos/sprites/2.png" id="3_158mb"]
+[ext_resource type="Texture2D" uid="uid://drqgvwb8a8l2b" path="res://recursos/sprites/4.png" id="3_jsrd8"]
+[ext_resource type="Texture2D" uid="uid://cqfqautyry7rm" path="res://recursos/sprites/3.png" id="4_wbdvm"]
+[ext_resource type="Texture2D" uid="uid://bpcd8wat3mg0a" path="res://recursos/sprites/1.png" id="4_wwsa2"]
 
 [node name="Control" type="Control" node_paths=PackedStringArray("boton_mundo_1")]
 layout_mode = 3
@@ -19,30 +21,35 @@ boton_mundo_1 = NodePath("TextureButton_Mundo1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -71.0
-offset_top = -22.0
-offset_right = 1939.0
-offset_bottom = 1114.0
+offset_left = -2.0
+offset_top = 4.0
+offset_right = 1930.0
+offset_bottom = 1086.0
 mouse_filter = 2
-texture = ExtResource("2_cayip")
+texture = ExtResource("2_158mb")
 expand_mode = 1
 
 [node name="TextureButton_Salir" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 31.0
-offset_top = 24.0
-offset_right = 71.0
-offset_bottom = 64.0
+offset_left = 1581.0
+offset_top = 13.0
+offset_right = 2605.0
+offset_bottom = 1037.0
+scale = Vector2(0.2764022, 0.2647192)
+texture_normal = ExtResource("3_jsrd8")
+texture_hover = ExtResource("3_jsrd8")
+texture_focused = ExtResource("4_wbdvm")
 
 [node name="TextureButton_Mundo1" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 754.00006
-offset_top = 154.0
-offset_right = 814.8654
-offset_bottom = 205.4497
-scale = Vector2(8.921333, 8.882461)
-texture_normal = ExtResource("4_158mb")
-texture_hover = ExtResource("4_158mb")
-texture_focused = ExtResource("3_cayip")
+offset_left = 668.0
+offset_top = 192.0
+offset_right = 1948.0
+offset_bottom = 861.0
+scale = Vector2(0.43698302, 0.34597114)
+texture_normal = ExtResource("3_158mb")
+texture_hover = ExtResource("3_158mb")
+texture_focused = ExtResource("4_wwsa2")
 
+[connection signal="pressed" from="TextureButton_Salir" to="." method="_on_texture_button_salir_pressed"]
 [connection signal="pressed" from="TextureButton_Mundo1" to="." method="_on_texture_button_mundo_1_pressed"]

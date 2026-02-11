@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cq6kpuc1j0ayy"
+path="res://.godot/imported/Letrero_magico.dialogue-2a0b8bc9dd4f67722738bd0275711c9c.tres"
+
+[deps]
+
+source_file="res://Dialogos/Letrero_magico.dialogue"
+dest_files=["res://.godot/imported/Letrero_magico.dialogue-2a0b8bc9dd4f67722738bd0275711c9c.tres"]
+
+[params]
+
+defaults=true

@@ -3095,10 +3095,10 @@ texture = ExtResource("22_og020")
 script = ExtResource("23_ic8vi")
 
 [node name="Area2D" parent="." instance=ExtResource("24_kqui2")]
-position = Vector2(3360, -31)
+position = Vector2(2808, -62)
 Escena = "Pueblo"
 
-[node name="Player" parent="." groups=["jugador"] instance=ExtResource("25_ic8vi")]
+[node name="Player" parent="." instance=ExtResource("25_ic8vi")]
 position = Vector2(-1933, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -3106,7 +3106,7 @@ position = Vector2(109, -8)
 zoom = Vector2(3, 3)
 limit_left = -2162
 limit_top = -10001220
-limit_right = 3297
+limit_right = 2742
 limit_bottom = 9998780
 position_smoothing_enabled = true
 position_smoothing_speed = 3.3

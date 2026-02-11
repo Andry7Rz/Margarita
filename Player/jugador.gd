@@ -8,7 +8,6 @@ extends CharacterBody2D
 @export var air_friction = 800.0
 
 # --- NUEVOS: NODOS DE AUDIO ---
-# Asegúrate de que los nodos hijos se llamen exactamente así en tu escena
 @onready var sonido_salto = $SonidoSalto
 @onready var sonido_dash = $SonidoDash
 @onready var sonido_daño = $SonidoDaño
@@ -36,8 +35,7 @@ extends CharacterBody2D
 @export var water_sink_speed = 100.0
 
 # --- SEÑALES DEL JUGADOR Y EL ENTORNO ---
-
-signal cambio_vida(nueva_cantidad) #Señal para conectar con el HUD
+signal cambio_vida(nueva_cantidad)
 
 # --- VARIABLES INTERNAS ---
 @onready var sprite = $AnimatedSprite2D 
@@ -52,23 +50,31 @@ var gravity_direction = 1.0
 var esta_hablando = false
 var vidas_maximas = 5
 var vidas_actuales = 5
-var es_invulnerable = false   #variable para saber si podemos recibir daño
+var es_invulnerable = false
 
 # --- VARIABLES DE CÁMARA ---
 @onready var camera = $Camera2D 
 var zoom_normal = Vector2(3, 3)
 var zoom_amplio = Vector2(1, 1)
 
+# --- FUNCIÓN READY (Modificada para el Marker) ---
 func _ready() -> void:
-	# Inicializamos las vidas al máximo
+	# --- LÓGICA DE POSICIONAMIENTO ---
+	if Global.volver_desde_menu:
+		# Buscamos el Marker2D llamado "PuntoAparicionMenu" en la escena actual
+		var marcador = get_tree().current_scene.find_child("PuntoAparicionMenu")
+		if marcador:
+			global_position = marcador.global_position
+		# Resetear bandera
+		Global.volver_desde_menu = false
+	
+	# --- LÓGICA ORIGINAL ---
 	vidas_actuales = vidas_maximas
-	# Esperamos un instante pequeñito para asegurar que el HUD esté listo
 	await get_tree().create_timer(0.1).timeout
-	# Avisamos al HUD para que ponga la imagen de 5 vidas al empezar
 	cambio_vida.emit(vidas_actuales)
 
+# --- PROCESO FÍSICO (Sin cambios) ---
 func _physics_process(delta: float) -> void:
-	# BLOQUEO POR DIÁLOGO
 	if esta_hablando:
 		_apply_gravity(delta)
 		_update_animations()
@@ -80,7 +86,6 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return 
 
-	# 1. GESTIÓN DE ESTADOS Y TIMERS
 	if is_on_floor():
 		coyote_timer = coyote_duration
 		can_dash = true
@@ -98,15 +103,12 @@ func _physics_process(delta: float) -> void:
 	if not is_in_water:
 		_handle_wall_mechanics(delta)
 
-	# --- LÓGICA DE SALTO (Con Sonido) ---
 	if (jump_buffer_timer > 0 and coyote_timer > 0) or (is_in_water and Input.is_action_just_pressed("saltar")):
 		velocity.y = jump_force * gravity_direction
 		jump_buffer_timer = 0
 		coyote_timer = 0 
-		
-		# REPRODUCIR SONIDO DE SALTO
 		if sonido_salto:
-			sonido_salto.pitch_scale = randf_range(0.9, 1.1) # Variación Undertale/Celeste
+			sonido_salto.pitch_scale = randf_range(0.9, 1.1)
 			sonido_salto.play()
 
 	if not is_on_wall() or is_on_floor() or is_in_water: 
@@ -127,20 +129,14 @@ func set_hablando(valor: bool):
 func start_dash():
 	is_dashing = true
 	can_dash = false
-	
-	# REPRODUCIR SONIDO DE DASH
 	if sonido_dash:
 		sonido_dash.play()
-	
 	var dir = Input.get_vector("izquierda", "derecha", "arriba", "abajo")
 	if dir == Vector2.ZERO:
 		dir.x = -1.0 if sprite.flip_h else 1.0 
-	
 	velocity = dir.normalized() * dash_speed
 	sprite.play("dash_1")
-	
 	await get_tree().create_timer(dash_duration).timeout
-	
 	is_dashing = false
 	velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	velocity.y = clamp(velocity.y, -max_speed, max_speed)
@@ -149,7 +145,6 @@ func _update_animations():
 	var direction = Input.get_axis("izquierda", "derecha")
 	if direction != 0:
 		sprite.flip_h = (direction < 0)
-
 	if is_on_wall_only() and not is_in_water:
 		sprite.play("wall_jump")
 	elif is_on_floor():
@@ -175,7 +170,6 @@ func _handle_horizontal_move(delta):
 	var direction = Input.get_axis("izquierda", "derecha")
 	var final_speed = max_speed * water_speed_multiplier if is_in_water else max_speed
 	var final_accel = acceleration * water_speed_multiplier if is_in_water else acceleration
-	
 	if direction:
 		velocity.x = move_toward(velocity.x, direction * final_speed, final_accel * delta)
 	else:
@@ -191,7 +185,6 @@ func _handle_wall_mechanics(delta):
 		var wall_normal = get_wall_normal()
 		var direction_input = Input.get_axis("izquierda", "derecha")
 		var is_pushing = (direction_input != 0 and sign(direction_input) == -sign(wall_normal.x))
-
 		if is_pushing:
 			if Input.is_action_pressed("arriba") and stamina > 0:
 				velocity.y = wall_climb_speed * gravity_direction
@@ -204,17 +197,13 @@ func _handle_wall_mechanics(delta):
 					stamina -= 15 * delta 
 				else:
 					velocity.y = wall_slide_speed * gravity_direction
-		
 		if Input.is_action_just_pressed("saltar"):
 			velocity.x = wall_normal.x * wall_jump_force.x
 			velocity.y = wall_jump_force.y * gravity_direction
 			stamina -= 5 
 			can_dash = true
-			# Sonido de salto de pared
 			if sonido_salto:
 				sonido_salto.play()
-
-# --- MECÁNICAS EXTERNAS ---
 
 func change_gravity_orientation(inverted: bool):
 	if inverted:
@@ -253,46 +242,23 @@ func launch_from_cannon(impulse_vector):
 	ajustar_zoom(zoom_normal)
 	velocity = impulse_vector
 
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	pass
 
 func recibir_daño():
-	
-	# Si ya somos invulnerables, NO hacemos nada (salimos de la función)
 	if es_invulnerable:
 		return
-	
-	# Solo restamos si estamos vivos
 	if vidas_actuales > 0:
 		vidas_actuales -= 1
-		
-		# --- SONIDO DAÑO ---
 		sonido_daño.play()
-		
-		# ¡AVISAMOS AL HUD! Aquí ocurre la magia.
 		cambio_vida.emit(vidas_actuales)
-		print("Vidas restantes: ", vidas_actuales)
-		
-		# --- INICIO DE LA PROTECCIÓN ---
-		print("¡Au! Iniciando invulnerabilidad...")
 		es_invulnerable = true
-		
-		# Opcional: Hacer que el personaje parpadee (cambiando su opacidad)
 		modulate.a = 0.5 
-		
-		# Creamos un temporizador temporal de 1.5 segundos
 		await get_tree().create_timer(1.5).timeout
-		
-		# --- FIN DE LA PROTECCIÓN ---
 		es_invulnerable = false
-		modulate.a = 1.0 # Volvemos a ser visibles al 100%
-		print("Ya te pueden pegar otra vez.")
-		
+		modulate.a = 1.0 
 		if vidas_actuales <= 0:
 			morir()
 
-func morir():  #conectar mas adelante con escena de game over
-	print("Game Over")
-	# Reinicia la escena actual
+func morir():
 	get_tree().change_scene_to_file("res://D/UI/screen_lose.tscn")
