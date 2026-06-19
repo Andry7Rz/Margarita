@@ -1734,6 +1734,10 @@ sources/1 = SubResource("TileSetAtlasSource_7b3vf")
 sources/2 = SubResource("TileSetAtlasSource_8m502")
 sources/3 = SubResource("TileSetAtlasSource_dmyoc")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtb4q"]
+radius = 806.0
+height = 1632.0
+
 [sub_resource type="Gradient" id="Gradient_prbfm"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -1744,10 +1748,6 @@ height = 128
 fill = 1
 fill_from = Vector2(0.48958334, 0.515625)
 fill_to = Vector2(0.6354167, 0.35416666)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtb4q"]
-radius = 806.0
-height = 1632.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7b3vf"]
 size = Vector2(26, 157)
@@ -1892,12 +1892,6 @@ drag_top_margin = 0.11
 drag_right_margin = 0.11
 editor_draw_limits = true
 
-[node name="antorchas" type="PointLight2D" parent="Player"]
-position = Vector2(-1, -2)
-scale = Vector2(1.4954835, 1.5205078)
-color = Color(0.42000002, 0.6713334, 1, 0.7294118)
-texture = SubResource("GradientTexture2D_uueh3")
-
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 script = ExtResource("10_mtb4q")
@@ -1915,10 +1909,16 @@ stream = ExtResource("12_8m502")
 autoplay = true
 
 [node name="CoralFiloso" parent="." instance=ExtResource("12_sfw8c")]
-position = Vector2(-148, 185)
+position = Vector2(-111, 185)
 
 [node name="CoralFiloso2" parent="." instance=ExtResource("12_sfw8c")]
 position = Vector2(-1567, 297)
+
+[node name="antorchas" type="PointLight2D" parent="."]
+position = Vector2(-2031, -29)
+scale = Vector2(1.4954835, 1.5205078)
+color = Color(0.42000002, 0.6713334, 1, 0.7294118)
+texture = SubResource("GradientTexture2D_uueh3")
 
 [node name="coral_amarillo4" type="Sprite2D" parent="."]
 position = Vector2(-806, 344)
@@ -2038,24 +2038,23 @@ position = Vector2(-974, 344)
 position = Vector2(-526, -204)
 
 [node name="PecesItem8" parent="." instance=ExtResource("17_6hrbf")]
-position = Vector2(-1621, 305)
+position = Vector2(-1540, 53)
 
 [node name="coral_blanco_inofensivo2" type="Sprite2D" parent="."]
 position = Vector2(-1599, 297)
 texture = ExtResource("13_dmyoc")
 
 [node name="PecesItem9" parent="." instance=ExtResource("17_6hrbf")]
-position = Vector2(-958, -305)
+position = Vector2(-744, -304)
 
 [node name="PecesItem10" parent="." instance=ExtResource("17_6hrbf")]
 position = Vector2(-972, 1)
 
 [node name="coral_rojo4" type="Sprite2D" parent="."]
-position = Vector2(-973, 1)
+position = Vector2(-1005, -4)
 texture = ExtResource("4_j62ov")
 
 [node name="ContPeces" parent="." instance=ExtResource("19_857x3")]
-visible = false
 
 [node name="Hud" parent="." instance=ExtResource("20_h8rm1")]
 visible = false
