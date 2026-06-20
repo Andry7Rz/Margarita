@@ -10,26 +10,26 @@
 script = ExtResource("1_q7omt")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 1704.0
-offset_top = 23.0
-offset_right = 1768.0
-offset_bottom = 88.0
+offset_left = 651.0
+offset_top = 12.0
+offset_right = 715.0
+offset_bottom = 77.0
 texture = ExtResource("1_ug4nd")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 1780.0
-offset_top = 9.0
-offset_right = 1820.0
-offset_bottom = 99.0
+offset_left = 735.0
+offset_top = -1.0
+offset_right = 775.0
+offset_bottom = 89.0
 theme_override_fonts/font = ExtResource("2_d3un3")
 theme_override_font_sizes/font_size = 60
 text = "x"
 
 [node name="etiqueta_cant_pez" type="Label" parent="."]
-offset_left = 1821.0
-offset_top = 15.0
-offset_right = 1881.0
-offset_bottom = 105.0
+offset_left = 773.0
+offset_top = 10.0
+offset_right = 833.0
+offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("2_d3un3")
 theme_override_font_sizes/font_size = 60
 text = "0"

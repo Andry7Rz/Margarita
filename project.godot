@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameManager="*res://Script/GameManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Global="*res://Script/GLOBAL.gd"
+ControlResolucion="*res://Script/control_resolucion.gd"
 
 [dialogue_manager]
 
@@ -27,8 +28,9 @@ runtime/balloon_path="res://Scenes/dialogo_escena/balloon.tscn"
 
 [display]
 
-window/size/viewport_width=1360
-window/size/viewport_height=720
+window/size/viewport_width=1366
+window/size/viewport_height=768
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

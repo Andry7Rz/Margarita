@@ -13,7 +13,7 @@ extends CharacterBody2D
 @onready var sonido_daño = $SonidoDaño
 
 @export_category("Salto Celeste")
-@export var jump_force = -300.0 
+@export var jump_force = -350.0 
 @export var gravity_multiplier = 1.0
 @export var fall_multiplier = 1.8 
 @export var coyote_duration = 0.15 
@@ -56,6 +56,7 @@ var es_invulnerable = false
 @onready var camera = $Camera2D 
 var zoom_normal = Vector2(3, 3)
 var zoom_amplio = Vector2(1, 1)
+var zoom_previo = Vector2(3, 3)
 
 # --- FUNCIÓN READY (Modificada para el Marker) ---
 func _ready() -> void:
@@ -161,7 +162,8 @@ func _update_animations():
 func _apply_gravity(delta):
 	if is_in_water:
 		velocity.y = move_toward(velocity.y, water_float_force * gravity_direction, 600 * delta)
-	elif not is_on_floor() and not is_on_wall():
+	# Solo dejamos "not is_on_floor()", borramos el "and not is_on_wall()"
+	elif not is_on_floor(): 
 		var going_up = (velocity.y * gravity_direction) < 0 
 		var mult = gravity_multiplier if going_up else fall_multiplier
 		velocity.y += gravity * mult * delta * gravity_direction
@@ -180,28 +182,23 @@ func _handle_horizontal_move(delta):
 			current_friction = air_friction
 		velocity.x = move_toward(velocity.x, 0, current_friction * delta)
 
+@warning_ignore("unused_parameter")
 func _handle_wall_mechanics(delta):
 	if is_on_wall_only() and not is_dashing:
 		var wall_normal = get_wall_normal()
 		var direction_input = Input.get_axis("izquierda", "derecha")
 		var is_pushing = (direction_input != 0 and sign(direction_input) == -sign(wall_normal.x))
-		if is_pushing:
-			if Input.is_action_pressed("arriba") and stamina > 0:
-				velocity.y = wall_climb_speed * gravity_direction
-				stamina -= 60 * delta 
-			elif Input.is_action_pressed("abajo"):
-				velocity.y = wall_slide_speed * 2 * gravity_direction
-			else:
-				if stamina > 0:
-					velocity.y = 0 
-					stamina -= 15 * delta 
-				else:
-					velocity.y = wall_slide_speed * gravity_direction
+		
+		# 1. DESLIZAMIENTO LENTO (Wall Slide)
+		# Si el jugador empuja hacia la pared y está cayendo, limitamos su velocidad de caída
+		if is_pushing and (velocity.y * gravity_direction) > 0:
+			velocity.y = wall_slide_speed * gravity_direction
+			
+		# 2. SALTO DE PARED (Wall Jump)
 		if Input.is_action_just_pressed("saltar"):
 			velocity.x = wall_normal.x * wall_jump_force.x
 			velocity.y = wall_jump_force.y * gravity_direction
-			stamina -= 5 
-			can_dash = true
+			can_dash = true # Recargamos el dash al hacer un wall jump
 			if sonido_salto:
 				sonido_salto.play()
 
@@ -232,16 +229,21 @@ func enter_cannon(cannon_position):
 	global_position = cannon_position
 	$CollisionShape2D.set_deferred("disabled", true)
 	sprite.visible = false
+	zoom_previo = camera.zoom # <--- NUEVA LÍNEA: Guardamos el zoom exacto que tienes en este momento
 	ajustar_zoom(zoom_amplio)
-	set_physics_process(false) 
+	
+	set_physics_process(false)
 
 func launch_from_cannon(impulse_vector):
 	$CollisionShape2D.set_deferred("disabled", false)
 	sprite.visible = true
 	set_physics_process(true)
-	ajustar_zoom(zoom_normal)
+	
+	ajustar_zoom(zoom_previo) # <--- CAMBIO: Ahora usamos la memoria en lugar de zoom_normal
+	
 	velocity = impulse_vector
 
+@warning_ignore("unused_parameter")
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	pass
 
